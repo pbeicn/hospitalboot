@@ -1,0 +1,250 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>注册信息</title>
+    <script src="../js/mock.js"></script>
+    <!-- <script src="../js/jquery.min.js"></script> -->
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .h1 {
+            /* width: 750px; */
+            width: 100%;
+            height: 98%;
+            background: rgba(245, 245, 245, 1);
+        }
+
+        .h2 {
+            /* width: 100%;
+            height: 100%; */
+            font-size: 52px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(0, 144, 255, 1);
+            margin-left: 20px;
+            cursor: hand;
+        }
+
+        .h21 {
+            /* width: 100%;
+            height: 100%; */
+            font-size: 42px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(0, 144, 255, 1);
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .h3 {
+            /* width:390px; */
+            font-size: 52px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: rgba(51, 51, 51, 1);
+            text-align: center;
+        }
+
+        .h4 {
+            /* width: 150px; */
+            font-size: 40px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 800;
+            color: rgba(51, 51, 51, 1);
+            line-height: 105px;
+            margin-left: 20px;
+        }
+
+        .h5 {
+            /* width: 160px; */
+            height: 100px;
+            font-size: 32px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(180, 190, 198, 1);
+            line-height: 145px;
+        }
+
+        .h6 {
+            /* width: 160px; */
+            width: 686px;
+            height: 94px;
+            background: rgba(0, 144, 255, 1);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .h7 {
+            font-size: 36px;
+            margin-top: 50%;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .h8 {
+            position: absolute;
+            bottom: 0;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+        });
+        function usrAdd() {
+            var user = new Object();
+            user.idcard = $("#idcard").val();
+            user.mobile = $("#mobile").val();
+            user.name = $("#name").val();
+            user.password = $("#password").val();
+            user.roles = "1";
+            $.ajax({
+                url: "http://localhost/api/v1/user",
+                type: "PUT",
+                // headers: {
+                //     Authorization: "Beareraaa"
+                // },
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify(user),
+                dataType: "json",
+                error: function (xhr) {
+                    // console.log(xhr);
+                    // alert(xhr.responseJSON.message);
+                    getHao(xhr.responseJSON.message);
+                    return false;
+                }
+            }).done(function (data, status, xhr) {
+                getHao(data.message);
+                console.log(data);
+            })
+        }
+        function getHao(info) {
+            $('#minfo').html(info)
+            $('#myModal').modal('show')
+        }
+    </script>
+</head>
+
+<body>
+    <br>
+    <div class="container-fluid" style="height: 100%">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-2">
+                <div class="h2" onclick="location.href='h1.html'"><i class="fa fa-chevron-left"
+                        aria-hidden="true"></i>&nbsp;返回</div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-5">
+                <div class="h3"><b>注册</b></div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-5">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <label for="name" class="h4">用户名:</label>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-8 col-xl-10">
+                <div class="form-group">
+                    <input type="text" class="form-control h5" id="name" placeholder="请填写本人真实姓名">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <label for="idcard" class="h4">身份证号:</label>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-8 col-xl-10">
+                <div class="form-group">
+                    <input type="text" class="form-control h5" id="idcard" placeholder="请填写身份证号码">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <label for="mobile" class="h4">手机号:</label>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-8 col-xl-10">
+                <div class="form-group">
+                    <input type="text" class="form-control h5" id="mobile" placeholder="请填写手机号码">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <label for="usraas" class="h4">验证码:</label>
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-4 col-xl-5">
+                <div class="form-group">
+                    <input type="text" class="form-control h5" id="usraa" placeholder="请输入验证码">
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-5">
+                <div class="form-group">
+                    <label class="h21">获取验证码</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <label for="password" class="h4">设置密码:</label>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-8 col-xl-10">
+                <div class="form-group">
+                    <input type="password" class="form-control h5" id="password" placeholder="请输入密码">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8 h6" style="padding-top: 20px">
+                <span class="h7" onclick="usrAdd()">确认</span>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h3 class="modal-title">信息提示</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <h4 class="panel-title" id="minfo"></h4>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

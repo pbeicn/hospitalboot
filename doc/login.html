@@ -1,0 +1,194 @@
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>医生登录</title>
+    <script src="../js/mock.js"></script>
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .h1 {
+            /* background: #767CFF; */
+            /* opacity: 0.07; */
+            /* z-index: 99; */
+            background-image: url('../img/doc/login/mm.jpg');
+            margin: 0px;
+            /* background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%; */
+            /* width: 100%;
+            height: 100%; */
+        }
+
+        .h2 {
+            width: 1200px;
+            margin: auto;
+            margin-top: 5%;
+            height: 700px;
+            /* overflow: auto; */
+            background: white;
+            /* z-index: 1;
+            box-shadow: 0px 3px 18px 0px rgba(21, 24, 113, 1); */
+            border-radius: 18px;
+        }
+
+        .h3 {
+            height: 700px;
+            background: linear-gradient(147deg, rgba(255, 255, 255, 1) 0%, rgba(199, 226, 254, 1) 100%, rgba(200, 227, 254, 1) 100%);
+            border-radius: 18px 0px 0px 18px;
+        }
+
+        .h4 {
+            height: 56px;
+            font-size: 40px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(51, 51, 51, 1);
+            line-height: 56px;
+            margin-left: 10%;
+        }
+
+        .h5 {
+            height: 40px;
+            font-size: 28px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(51, 51, 51, 1);
+            line-height: 40px;
+            margin-left: 10%;
+        }
+
+        .h6 {
+            position: relative;
+            margin: auto;
+            text-align: center;
+        }
+
+        .h7 {
+            position: absolute;
+            margin: auto;
+            text-align: center;
+            height: 40px;
+            font-size: 28px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 40px;
+            margin-left: 45%;
+            margin-top: -85px;
+        }
+
+        .h8 {
+            height: 40px;
+            font-size: 18px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#toLogin").click(function () {
+                var obj = new Object();
+                obj.grant_type = "password";
+                obj.client_id = "practice";
+                obj.client_secret = "neuqsoft2019";
+                obj.username = $('#usr').val();
+                obj.password = $('#pwd').val();
+                if (obj.username == "" || obj.password == "") {
+                    getHao("用户名和密码不能为空");
+                    return;
+                }
+                $.ajax({
+                    url: "http://localhost/oauth/token",
+                    type: "POST",
+                    // contentType: 'application/json; charset=UTF-8',
+                    dataType: "json",
+                    data: obj,
+                    error: function (xhr) {
+                        console.log(xhr);
+                        getHao(xhr.responseJSON.error_description);
+                        return false;
+                    }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    localStorage.setItem("access_token", data.access_token);
+                    localStorage.setItem("idcard", obj.username);
+                    window.location = "main.html";
+                    // alert($.cookie('access_token'));
+                })
+            })
+        });
+        function getHao(info) {
+            $('#minfo').html(info)
+            $('#myModal').modal('show')
+        }
+    </script>
+</head>
+
+<body class="h1">
+    <!-- <div class="h2">ss<br>ssss<br><br><br>sss<br><br>sss</div> -->
+    <div class="container-fluid h2">
+        <div class="row">
+            <div class="col-md-6 h3">
+                <img src="../img/doc/login/4.png" width="500px" height="400px" style="margin: auto;margin-top: 25%">
+            </div>
+            <div class="col-md-6">
+                <br><br>
+                <div class="h4">欢迎登录就诊问诊</div>
+                <br><br>
+                <div class="form-group">
+                    <label for="usr" class="h5">用户名:</label>
+                    <input type="text" class="form-control" id="usr" placeholder="请输入用户名"
+                        style="margin-left:10%;width:400px;background:none;border:none;border-bottom:1px solid #ddd;"
+                        value="513436200010056380">
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <label for="pwd" class="h5">密码:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="请输入密码"
+                        style="margin-left:10%;width:400px;background:none;border:none;border-bottom:1px solid #ddd;">
+                </div>
+                <br>
+                <div class="h6" id="toLogin">
+                    <img src="../img/doc/login/2.png" width="500px" height="100px">
+                    <div class="h7">登录</div>
+                    <div class="h8" style="text-align: center;widows: 100%;">还没有账号，点击<a style="color: #108EE9"
+                            href="register.html">注册</a>一下
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h3 class="modal-title">信息提示</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <h4 class="panel-title" id="minfo"></h4>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

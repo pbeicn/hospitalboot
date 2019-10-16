@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>首页</title>
+    <script src="../js/mock.js"></script>
+    <!-- <script src="../js/jquery.min.js"></script> -->
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        .h1 {
+            height: 100px;
+            background: linear-gradient(270deg, rgba(38, 135, 238, 1) 0%, rgba(70, 176, 248, 1) 54%, rgba(85, 200, 254, 1) 100%);
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#to1").click(function () {
+                location.href = "ytj/h1.html";
+            })
+            $("#to2").click(function () {
+                location.href = "huanzhe/h1.html";
+            })
+            $("#to3").click(function () {
+                location.href = "doc/login.html";
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>导航</h2>
+        <div class="card">
+            <div class="card-body" id="to1">一体机</div>
+        </div>
+        <div class="card">
+            <div class="card-body" id="to2">患者页面(手机端)</div>
+        </div>
+        <div class="card">
+            <div class="card-body" id="to3">医生页面(PC端)</div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>演示：使用jquery.qrcode生成二维码</title>
+    <script src="../js/mock.js"></script>
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#sub_btn").click(function () {
+                $("#code").empty();
+                var str = $("#mytxt").val();
+
+                $("#code").qrcode({
+                    render: "table",
+                    width: 200,
+                    height: 200,
+                    text: str
+                });
+            });
+        })
+    </script>
+</head>
+
+<body>
+
+    <div id="main">
+        <div class="demo">
+            <p>请输入内容然后提交生成二维码：</p>
+            <p><input type="text" class="input" id="mytxt" value=""> <input type="button" id="sub_btn" value="提交"></p>
+            <div id="code"></div>
+        </div>
+
+</body>
+
+</html>

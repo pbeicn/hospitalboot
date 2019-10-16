@@ -1,0 +1,258 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>选医生</title>
+    <script src="../js/mock.js"></script>
+    <!-- <script src="../js/jquery.min.js"></script> -->
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
+    <style>
+        .h1 {
+            height: 100px;
+            background: linear-gradient(270deg, rgba(38, 135, 238, 1) 0%, rgba(70, 176, 248, 1) 54%, rgba(85, 200, 254, 1) 100%);
+        }
+
+        .h2 {
+            cursor: hand;
+            height: 45px;
+            font-size: 32px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 45px;
+        }
+
+        .h3 {
+            height: 50px;
+            font-size: 36px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .h4 {
+            width: 100%;
+            height: 450px;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 23px;
+        }
+
+        .h5 {
+            width: 433px;
+            height: 40px;
+            font-size: 28px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 40px;
+        }
+
+        .h6 {
+            width: 489px;
+            height: 33px;
+            font-size: 24px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(0, 144, 255, 1);
+            line-height: 33px;
+        }
+
+        .h7 {
+            width: 74px;
+            height: 50px;
+            font-size: 36px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 50px;
+        }
+
+        .h8 {
+            /* width: 74px;
+            height: 50px; */
+            font-size: 36px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 50px;
+        }
+
+        .h9 {
+            white-space: nowrap;
+            height: 135px;
+            font-size: 36px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 50px;
+            margin-top: 40px;
+            margin-left: 20px;
+        }
+
+        .h10 {
+            white-space: nowrap;
+            height: 135px;
+            font-size: 28px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 40px;
+            margin-top: 42px;
+            margin-left: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var docID = localStorage.getItem("docID");
+            // Mock.mock('http://localhost/api/v1/docinfo', 'get', {
+            //     "certificate": "@NAME",
+            //     "count": "@NAME",
+            //     "department": "@NAME",
+            //     "grade": "@NAME",
+            //     "location": "@NAME",
+            //     "mobile": "@NAME",
+            //     "name": "@CNAME",
+            //     "roles": "@NAME"
+            // })
+            //获取医生信息
+            $.ajax({
+                url: "http://localhost/api/v1/doctor/" + docID,
+                type: "GET",
+                // headers: {
+                //     Authorization: "Bearer" + localStorage.getItem("access_token")
+                // },
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json"
+            }).done(function (data, status, xhr) {
+                console.log(data);
+                $("#docintro").html(data.location);
+                $("#docName").html(data.name);
+                $("#docGrade").html(data.grade);
+            })
+            //获取医生二维码
+            $.ajax({
+                url: "http://localhost/api/v1/register/" + docID,
+                type: "POST",
+                // headers: {
+                //     Authorization: "Bearer" + localStorage.getItem("access_token")
+                // },
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json"
+            }).done(function (data, status, xhr) {
+                console.log(data);
+                $("#did").html(data.registerCode);
+                $("#code").qrcode({
+                    render: "table",
+                    width: $('#aaa').width() * 0.3,
+                    height: $('#aaa').height() * 0.3,
+                    text: data.registerCode
+                });
+            })
+
+            $("#gohome").click(function () {
+                location.href = "../index.html";
+            })
+        });
+        function getHao() {
+            $('#myModal').modal('show')
+        }
+    </script>
+</head>
+
+<body>
+    <table class="h1" style="width:100%;">
+        <tr>
+            <td width="33%"><img src=" ../img/h21.png"> <span class="h2"
+                    onclick="location.href='h2.html'">&nbsp;&nbsp;返回</span></td>
+            <td width="33%" align="center" class="h3">扫码挂号</td>
+            <td width="33%" align="right">
+                <i class="fa fa-home" style="color: white;margin-right: 30px" id="gohome"></i>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <table style="width:100%;">
+        <tr>
+            <td width="5%"></td>
+            <td>
+                <div class="h4">
+                    <table style="width:100%;height: 100%;">
+                        <tr>
+                            <td style="width:10%;height: 100%;">
+                            <td style="width:45%;height: 100%;">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div style="text-align: center"><img src='../img/h23.png'></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="h9" id="docName"></div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="h10" id="docGrade"></div>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="docintro" class="h8"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width:45%;height: 100%;" align="center" id="aaa">
+                                <!-- <img src="../img/h31.png" onclick="getHao()"> -->
+                                <div id="code"></div>
+                                <br><br>
+                                <div class="h5">医生:<span id="did"></span></div>
+                                <br><br>
+                                <div class="h6">提示：请使用手机APP扫码医生二维码码挂号</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </td>
+            <td width="5%"></td>
+        </tr>
+    </table>
+    <!-- 按钮：用于打开模态框 -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        打开模态框
+    </button> -->
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h3 class="modal-title">信息提示</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <h4 class="panel-title">挂号成功</h4>
+                    <h5 class="panel-title">请收好您的挂号凭证</h5>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

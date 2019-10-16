@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>菱形</title>
+    <style type="text/css">
+        .pc {
+            position: relative;
+        }
+
+        .diamond {
+            position: absolute;
+            width: 63px;
+            height: 63px;
+            background: #5DD1BB;
+            transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            /* Internet Explorer */
+            -moz-transform: rotate(45deg);
+            /* Firefox */
+            -webkit-transform: rotate(45deg);
+            /* Safari 和 Chrome */
+            -o-transform: rotate(45deg);
+            margin-top: 10px;
+            /* Opera */
+            /* margin: 50px auto; */
+            /*让菱形浏览器上居中*/
+        }
+
+        .diamond1 {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            background: #5DD1BB;
+            transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            /* Internet Explorer */
+            -moz-transform: rotate(45deg);
+            /* Firefox */
+            -webkit-transform: rotate(45deg);
+            /* Safari 和 Chrome */
+            -o-transform: rotate(45deg);
+            margin-top: 20px;
+            margin-left: 50px;
+            /* Opera */
+            /* margin: 50px auto; */
+            /*让菱形浏览器上居中*/
+        }
+    </style>
+    <script>
+        alert(1);
+        wx.scanQRCode({
+            desc: 'scanQRCode desc',
+            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+            scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (res) {
+                if (res.errMsg.indexOf('function_not_exist') > 0) {
+                    alert('版本过低请升级')
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pc">
+        <div class="diamond"></div>
+        <div class="diamond1"></div>
+    </div>
+
+</body>
+
+</html>

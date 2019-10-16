@@ -1,0 +1,231 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>选医生</title>
+    <!-- <script src="../js/jquery.min.js"></script> -->
+    <script src="../js/jquery.3min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .h1 {
+            height: 100px;
+            background: linear-gradient(270deg, rgba(38, 135, 238, 1) 0%, rgba(70, 176, 248, 1) 54%, rgba(85, 200, 254, 1) 100%);
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .h2 {
+            cursor: hand;
+            height: 45px;
+            font-size: 32px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 45px;
+        }
+
+        .h3 {
+            height: 50px;
+            font-size: 36px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .h4 {
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(51, 51, 51, 1);
+            line-height: 50px;
+        }
+
+        .h5 {
+            width: 44px;
+            height: 45px;
+        }
+
+        .h6 {
+            /* width: 1600px; */
+            /* height: 800px; */
+            background: rgba(246, 247, 251, 1);
+            display: flex;
+            /* justify-content: flex-start space-between; */
+            flex-wrap: wrap;
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            padding-left: 5%;
+        }
+
+        .h7 {
+            margin-top: 100px;
+            position: relative;
+            width: 369px;
+            height: 250px;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.09);
+            border-radius: 2px;
+
+        }
+
+        .ms {
+            position: absolute;
+            top: -75px;
+            left: 25px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .h8 {
+            /* margin-top: 80px;
+            margin-left: 50px; */
+            /* width: 58px; */
+            height: 40px;
+            font-size: 22px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 40px;
+        }
+
+        .h9 {
+            width: 68px;
+            height: 30px;
+            font-size: 16px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 30px;
+        }
+
+        .h10 {
+            padding-left: 20px;
+            width: 296px;
+            height: 65px;
+            font-size: 18px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 25px;
+        }
+
+        .h11 {
+            cursor: hand;
+            width: 176px;
+            height: 32px;
+            background: rgba(24, 144, 255, 1);
+            border-radius: 4px;
+        }
+
+        .h12 {
+            cursor: hand;
+            width: 112px;
+            height: 24px;
+            font-size: 16px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 24px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "http://localhost/api/v1/doctor",
+                type: "GET",
+                headers: {
+                    Authorization: "Bearer" + localStorage.getItem("access_token")
+                },
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json"
+            }).done(function (data, status, xhr) {
+                console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    $doc = "<div class='h7' style='margin-left: 20px;margin-right: 20px'>";
+                    $doc += " <div class='ms'><img src='../img/h23.png'></div>";
+                    $doc += "  <table width=100% style='margin-top: 60px'>";
+                    $doc += "    <tr>";
+                    $doc += "    <td align='right' width='33%'>";
+                    $doc += "    <div class='h8'>" + data[i].name + "</div>";
+                    $doc += "  </td>";
+                    $doc += " <td align='right'>";
+                    $doc += "   <div class='h9'>" + data[i].department + "</div>";
+                    $doc += "  </td>";
+                    $doc += "  <td align='center'>";
+                    $doc += "  <div class='h9'>" + data[i].grade + "</div>";
+                    $doc += " </td>";
+                    $doc += "  </tr>";
+                    $doc += " <tr>";
+                    $doc += "  <td colspan='3'><br>";
+                    $doc += "    <div class='h10'>" + data[i].location + "</div>";
+                    $doc += "  </td>";
+                    $doc += "   </tr>";
+                    $doc += "  <tr>";
+                    $doc += "    <td colspan='3' align='center'><br>";
+                    $doc += "      <div class='h11'><span class='h12' onclick='getDocInfo(\"" + data[i].id + "\")'>挂号</span></div>";
+                    $doc += " </td>";
+                    $doc += " </tr>";
+                    $doc += "  </table>";
+                    $doc += "   </div>";
+                    $("#docList").append($doc);
+                }
+            })
+            $("#gohome").click(function () {
+                location.href = "../index.html";
+            })
+        });
+        function getDocInfo(docID) {
+            localStorage.setItem("docID", docID);
+            location.href = "h3.html";
+        }
+    </script>
+</head>
+
+<body style="margin:0px;">
+    <table class="h1" style="width:100%;">
+        <tr>
+            <td width="33%"><img src=" ../img/h21.png"> <span class="h2"
+                    onclick="location.href='h1.html'">&nbsp;&nbsp;返回</span></td>
+            <td width="33%" align="center" class="h3">医生列表</td>
+            <td width="33%" align="right"><i class="fa fa-home" style="color: white;margin-right: 30px" id="gohome"></i>
+            </td>
+        </tr>
+    </table>
+    <div class="h6" id="docList">
+        <!-- <div class="h7" style="margin-left: 20px;margin-right: 20px">
+            <div class="ms"><img src="../img/h23.png"></div>
+            <table width=100% style="margin-top: 60px">
+                <tr>
+                    <td align="right" width="33%">
+                        <div class="h8" id="d1"></div>
+                    </td>
+                    <td align="right">
+                        <div class="h9" id="d2"></div>
+                    </td>
+                    <td align="center">
+                        <div class="h9" id="d3"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><br>
+                        <div class="h10" id="d4"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center"><br>
+                        <div class="h11"><span class="h12">挂号</span></div>
+                    </td>
+                </tr>
+            </table>
+        </div> -->
+    </div>
+</body>
+
+</html>

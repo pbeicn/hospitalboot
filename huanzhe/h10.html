@@ -1,0 +1,357 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>就诊记录详情</title>
+    <script src="../js/mock.js"></script>
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .h1 {
+            /* height: 346px; */
+            background: rgba(16, 142, 233, 1);
+            position: relative;
+        }
+
+        .h2 {
+            /* width: 100%;
+            height: 100%; */
+            font-size: 52px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            margin-left: 20px;
+            cursor: hand;
+        }
+
+        .h3 {
+            font-size: 52px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .h4 {
+            height: 48px;
+            font-size: 34px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+            line-height: 48px;
+        }
+
+        .h5 {
+            height: 42px;
+            font-size: 30px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+            line-height: 42px;
+        }
+
+        .h6 {
+            width: 80%;
+            height: 152px;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            position: absolute;
+            top: 80%;
+            left: 10%;
+        }
+
+        .h7 {
+            font-size: 30px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 42px;
+        }
+
+        .h8 {
+            font-size: 30px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: rgba(51, 51, 51, 1);
+            line-height: 42px;
+        }
+
+        .h9 {
+            height: 353px;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .h10 {
+            width: 10px;
+            height: 29px;
+            background: rgba(0, 144, 255, 1);
+        }
+
+        .h11 {
+            height: 45px;
+            font-size: 32px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(0, 144, 255, 1);
+            line-height: 45px;
+        }
+
+        .h12 {
+            height: 40px;
+            font-size: 28px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            Mock.mock('http://localhost/api/v1/diagnose/id', 'get', {
+                "checkDTOS": [
+                    {
+                        "aka130": "string",
+                        "department": "string",
+                        "description": "胸透",
+                        "diagnosecode": "string",
+                        "id": "string",
+                        "money": "100",
+                        "patientage": "string",
+                        "patientidcard": "string",
+                        "patientname": "string",
+                        "patientsex": "string",
+                        "result": "string"
+                    },
+                    {
+                        "aka130": "string",
+                        "department": "string",
+                        "description": "血常规",
+                        "diagnosecode": "string",
+                        "id": "string",
+                        "money": "200",
+                        "patientage": "string",
+                        "patientidcard": "string",
+                        "patientname": "string",
+                        "patientsex": "string",
+                        "result": "string"
+                    }
+                ],
+                "checkmoney": "string",
+                "drugmoney": "string",
+                "endtime": "string",
+                "id": "string",
+                "patientage": "string",
+                "patientidcard": "string",
+                "patientname": "string",
+                "patientsex": "string",
+                "recipe": {
+                    "aka130": "string",
+                    "department": "string",
+                    "diagnosecode": "string",
+                    "medicine": [
+                        {
+                            "brandname": "string",
+                            "dosageform": "string",
+                            "dosesiz": "string",
+                            "frequency": "string",
+                            "id": "string",
+                            "medicinecnt": "3",
+                            "medicinename": "阿司匹林",
+                            "medicinesize": "string",
+                            "money": "50.9",
+                            "remark": "string",
+                            "sellpackage": "string"
+                        }, {
+                            "brandname": "string",
+                            "dosageform": "string",
+                            "dosesiz": "string",
+                            "frequency": "string",
+                            "id": "string",
+                            "medicinecnt": "5",
+                            "medicinename": "氯雷他定",
+                            "medicinesize": "string",
+                            "money": "79.98",
+                            "remark": "string",
+                            "sellpackage": "string"
+                        }
+                    ],
+                    "patientAge": "string",
+                    "patientIdcard": "string",
+                    "patientName": "string",
+                    "patientSex": "string"
+                },
+                "result": "string",
+                "starttime": "string",
+                "state": "string",
+                "totalmoney": "string"
+            })
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("=");
+            var sid = searchData[1];
+            $.ajax({
+                url: "http://localhost/api/v1/diagnose/id",
+                type: "GET",
+                headers: {
+                    "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                    "X-CARD-CODE": "18450623655182337"
+                },
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json"
+            }).done(function (data, status, xhr) {
+                console.log(data);
+                //处理检查
+                var checks = data.checkDTOS;
+                var checkall = 0;
+                for (var i = 0; i < checks.length; i++) {
+                    $str = "<tr height='90px'>";
+                    $str += "<td width='40%' align='center' class='h12'>" + checks[i].description + "</td>";
+                    $str += "<td width='40%' class='h12'>x1</td>";
+                    $str += "<td width='20%' class='h12' style='color: rgba(255, 30, 30, 1); '>" + checks[i].money + "￥</td>";
+                    $str += "</tr>";
+                    $("#check1").before($str);
+                    checkall += parseFloat(checks[i].money);
+                }
+                $("#checkall").html(checkall + "￥");
+                //处理处方
+                var drugs = data.recipe.medicine;
+                var drugall = 0;
+                for (var i = 0; i < drugs.length; i++) {
+                    $dstr = "<tr height='90px'>";
+                    $dstr += "<td width='40%' align='center' class='h12'>" + drugs[i].medicinename + "</td>";
+                    $dstr += "<td width='40%' class='h12'>x" + drugs[i].medicinecnt + "</td>";
+                    $dstr += "<td width='20%' class='h12' style='color: rgba(255, 30, 30, 1); '>" + drugs[i].money + "￥</td>";
+                    $dstr += "</tr>";
+                    $("#drug1").before($dstr);
+                    drugall += parseFloat(drugs[i].money);
+                }
+                $("#drugall").html(drugall + "￥");
+                $("#allm").html((drugall + checkall) + "￥");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid h1">
+        <div class="row h1">
+            <div class="col-md-5">
+                <div class="h2" onclick="location.href='h9.html'"><i class="fa fa-chevron-left"
+                        aria-hidden="true"></i>&nbsp;返回</div>
+            </div>
+            <div class="col-md-6">
+                <div class="h3"><b>就诊记录详情</b></div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3 h4">刘秀梅</div>
+            <div class="col-md-8 h4">心内科丨副主任医师</div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-11 h4">2019-09-23 15:00:00</div>
+        </div>
+        <br><br>
+        <div class="h6">
+            <table width="100%" height="100%">
+                <tr>
+                    <td width="5%"></td>
+                    <td>
+                        <div class="h7">诊断结果</div>
+                        <div style="height: 20px"></div>
+                        <div class="h8">流行性感冒</div>
+                    </td>
+                    <td width="20%" class="h8" style="color:rgba(255,30,30,1);" id="allm"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br><br><br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 h9">
+                <table width="100%">
+                    <tr>
+                        <td width="12px">
+                            <div class="h10"></div>
+                        </td>
+                        <td>
+                            <div class="h11">&nbsp;&nbsp;&nbsp;处方</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table width="100%">
+                                <!-- <tr height="90px">
+                                    <td width="10%" align="center" class="h12">阿司匹林</td>
+                                    <td width="60%" class="h12">x3(盒）</td>
+                                    <td width="20%" class="h12" style="color:rgba(255,30,30,1);">100.00￥</td>
+                                </tr>
+                                <tr height="90px">
+                                    <td width="10%" align="center" class="h12">阿司匹林</td>
+                                    <td width="60%" class="h12">x3(盒）</td>
+                                    <td width="20%" class="h12" style="color:rgba(255,30,30,1);">100.00￥</td>
+                                </tr> -->
+                                <tr height="100px" id="drug1">
+                                    <td width="40%"></td>
+                                    <td width="40%" align="right" class="h12" style="columns: #333333;">合计:</td>
+                                    <td width="20%" class="h12" style="color:rgba(255,30,30,1);" id="drugall"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td width="12px">
+                            <div class="h10"></div>
+                        </td>
+                        <td>
+                            <div class="h11">&nbsp;&nbsp;&nbsp;检查记录</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table width="100%">
+                                <!-- <tr height="90px">
+                                    <td width="10%" align="center" class="h12">阿司匹林</td>
+                                    <td width="60%" class="h12">x3(盒）</td>
+                                    <td width="20%" class="h12" style="color:rgba(255,30,30,1);">100.00￥</td>
+                                </tr>
+                                <tr height="90px">
+                                    <td width="10%" align="center" class="h12">阿司匹林</td>
+                                    <td width="60%" class="h12">x3(盒）</td>
+                                    <td width="20%" class="h12" style="color:rgba(255,30,30,1);">100.00￥</td>
+                                </tr> -->
+                                <tr height="90px" id="check1">
+                                    <td width="40%"></td>
+                                    <td width="40%" align="right" class="h12" style="columns: #333333;">合计:</td>
+                                    <td width="20%" class="h12" style="color:rgba(255,30,30,1);" id="checkall"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

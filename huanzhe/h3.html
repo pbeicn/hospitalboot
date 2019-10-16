@@ -1,0 +1,299 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>患者首页</title>
+    <script src="../js/mock.js"></script>
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        html {
+            overflow-x: hidden;
+        }
+
+        .h1 {
+            height: 232px;
+            background: linear-gradient(133deg, rgba(92, 167, 251, 1) 0%, rgba(50, 94, 242, 1) 100%, rgba(50, 94, 242, 1) 100%);
+            /* border-radius: 25px 25px; */
+        }
+
+        .h2 {
+            /* width: 264px; */
+            height: 62px;
+            font-size: 44px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            line-height: 62px;
+        }
+
+        .h3 {
+            margin-top: 10px;
+            width: 208px;
+            height: 37px;
+            font-size: 26px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 37px;
+        }
+
+        .h4 {
+            margin-top: 10px;
+            width: 52px;
+            height: 37px;
+            font-size: 26px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+            line-height: 37px;
+            cursor: hand;
+        }
+
+        .h5 {
+            width: 750px;
+            height: 1067px;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 34px;
+        }
+
+        .h6 {
+            width: 181px;
+            height: 274px;
+            background: linear-gradient(132deg, rgba(90, 164, 250, 1) 0%, rgba(53, 99, 242, 1) 100%);
+            opacity: 0.56;
+        }
+
+        .h7 {
+            margin-top: -20px;
+            width: 100%;
+            background: linear-gradient(133deg, rgba(92, 167, 251, 1) 0%, rgba(50, 94, 242, 1) 100%, rgba(50, 94, 242, 1) 100%);
+            /* border-radius: 25px 25px; */
+        }
+
+        .h8 {
+            height: 56px;
+            font-size: 40px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(51, 51, 51, 1);
+            line-height: 56px;
+        }
+
+        .h9 {
+            height: 200px;
+            background: rgba(225, 105, 115, 1);
+            border-radius: 17px;
+        }
+
+        .h10 {
+            height: 200px;
+            background: rgba(105, 157, 225, 1);
+            border-radius: 17px;
+        }
+
+        .h11 {
+            height: 200px;
+            background: rgba(105, 203, 225, 1);
+            border-radius: 17px;
+        }
+
+        .h12 {
+            height: 45px;
+            margin-top: 20px;
+            font-size: 32px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            line-height: 45px;
+        }
+
+        .h13 {
+            height: 33px;
+            font-size: 24px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 33px;
+        }
+
+        #rcorners6 {
+            border-radius: 70px 70px 0px 0px;
+            background: white;
+            height: 50px;
+
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            // Mock.mock('http://localhost/api/v1/code', 'get', {
+            //     "pname": "@CNAME"
+            // })
+            $.ajax({
+                url: "http://localhost/api/v1/pname",
+                type: "GET",
+                headers: {
+                    Authorization: "Bearer" + localStorage.getItem("access_token")
+                },
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json"
+            }).done(function (data, status, xhr) {
+                console.log(data);
+                $("#pname").html(data.name);
+            })
+            console.log(localStorage.getItem("access_token"));
+            $("#toCard").click(function () {
+                //判断是否已申领过就诊卡
+                $.ajax({
+                    url: "http://localhost/api/v1/ecard",
+                    type: "GET",
+                    headers: {
+                        Authorization: "Bearer" + localStorage.getItem("access_token")
+                    },
+                    contentType: 'application/json; charset=UTF-8',
+                    // data: JSON.stringify(user),
+                    dataType: "json",
+                    error: function (xhr) {
+                        console.log(xhr);
+                        return false;
+                    }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    if (data.vid != "" || data.vid != null) {
+                        localStorage.setItem("vid", data.vid);
+                        location.href = "h6.html";
+                    }
+                    else {
+                        location.href = "h4.html";
+                    }
+                })
+            })
+        });
+        function getHao(info) {
+            $('#minfo').html(info)
+            $('#myModal').modal('show')
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row h1">
+            <div class="col-md-11">
+                <br>
+                <div class="h2">您好，<span id="pname"></span>&nbsp;&nbsp;<i style="font-size: 24px"
+                        class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+                <div class="h3">欢迎使用就诊问诊</div>
+            </div>
+            <div class="col-md-1">
+                <br>
+                <div class="h4" onclick="window.location='h1.html'">退出</div>
+            </div>
+        </div>
+    </div>
+    <div class="h7">
+        <div id="rcorners6"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="h8">就诊服务</div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="card" onclick="location.href='h8.html'" style="cursor: hand">
+                    <div class="card-body h9">
+                        <table width="100%">
+                            <tr>
+                                <td><img src="../img/11.jpg" width="44px"></td>
+                                <td align="right"><i style="color: white" class="fa fa-plus" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="h12">扫码挂号</div>
+                        <div class="h13">您可以通过扫码功能进行快速挂号</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="card" id="toCard" style="cursor: hand">
+                    <div class="card-body h10">
+                        <table width="100%">
+                            <tr>
+                                <td><i style="color: white;font-size: 44px" class="fa fa-id-card-o"
+                                        aria-hidden="true"></i></td>
+                                <td align="right"><i style="color: white" class="fa fa-plus" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="h12">就诊卡</div>
+                        <div class="h13">医生通过您出示的就诊卡二维码，快速了解您的过往疾病</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="card" onclick="location.href='h9.html'" style="cursor: hand">
+                    <div class="card-body h11">
+                        <table width="100%">
+                            <tr>
+                                <td><i style="color: white;font-size: 44px" class="fa fa-address-book-o"
+                                        aria-hidden="true"></i></td>
+                                <td align="right"><i style="color: white" class="fa fa-plus" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="h12">就诊记录</div>
+                        <div class="h13">历史就诊记录一键查询</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h3 class="modal-title">信息提示</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <h4 class="panel-title" id="minfo"></h4>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
