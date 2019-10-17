@@ -1,0 +1,232 @@
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>医生首页</title>
+    <script src="../js/mock.js"></script>
+    <script src="../js/jquery.3min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+      .pc {
+        position: relative;
+        /* margin-top: 10px; */
+      }
+
+      .diamond {
+        position: absolute;
+        width: 43px;
+        height: 43px;
+        background: #93e2d3;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        /* Internet Explorer */
+        -moz-transform: rotate(45deg);
+        /* Firefox */
+        -webkit-transform: rotate(45deg);
+        /* Safari 和 Chrome */
+        -o-transform: rotate(45deg);
+        margin-top: 21px;
+        /* Opera */
+        /* margin: 50px auto; */
+        /*让菱形浏览器上居中*/
+      }
+
+      .diamond1 {
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        background: #5dd1bb;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        /* Internet Explorer */
+        -moz-transform: rotate(45deg);
+        /* Firefox */
+        -webkit-transform: rotate(45deg);
+        /* Safari 和 Chrome */
+        -o-transform: rotate(45deg);
+        margin-top: 26px;
+        margin-left: 35px;
+        /* Opera */
+        /* margin: 50px auto; */
+        /*让菱形浏览器上居中*/
+      }
+
+      .h1 {
+        /* height: 90px; */
+        background: rgba(255, 255, 255, 1);
+      }
+
+      .h2 {
+        height: 37px;
+        font-size: 26px;
+        font-family: PingFangSC-Semibold, PingFangSC;
+        font-weight: 600;
+        color: rgba(51, 51, 51, 1);
+        line-height: 37px;
+      }
+
+      .h3 {
+        height: 33px;
+        font-size: 24px;
+        font-family: PingFangSC-Semibold, PingFangSC;
+        font-weight: 600;
+        color: rgba(51, 51, 51, 1);
+        line-height: 33px;
+      }
+
+      .h4 {
+        font-size: 20px;
+        font-family: PingFangSC-Semibold, PingFangSC;
+        font-weight: 600;
+        color: rgba(0, 144, 255, 1);
+      }
+
+      .h5 {
+        height: 33px;
+        font-size: 24px;
+        font-family: PingFangSC-Regular, PingFangSC;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+        line-height: 33px;
+      }
+      .h9 {
+        height: 145px;
+        background: rgba(135, 182, 242, 1);
+        box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+      }
+
+      .h10 {
+        height: 28px;
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFangSC;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+        line-height: 28px;
+      }
+
+      .h101 {
+        height: 28px;
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFangSC;
+        font-weight: 400;
+        color: black;
+        background: rgba(255, 255, 255, 1);
+        line-height: 28px;
+      }
+    </style>
+    <script type="text/javascript">
+      var which = "2";
+      var chindex = 2;
+      var dsindex = 1;
+      var checkmoney = 100;
+      $(function() {
+        $.ajax({
+          url: "http://localhost/api/v1/doctor1",
+          type: "GET",
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("access_token")
+          },
+          contentType: "application/json; charset=UTF-8",
+          dataType: "json"
+        }).done(function(data, status, xhr) {
+          console.log(data);
+          $("#pname").html(data.doctorName);
+          $("#dept").html(data.department);
+          var huanzhes = data.registerPatientDtoList;
+          for (let index = 0; index < huanzhes.length; index++) {
+            const huanzhe = huanzhes[index];
+          }
+        });
+      });
+    </script>
+  </head>
+
+  <body style="margin:0px;background: #F0F2F5">
+    <div class="container-fluid h-100">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="h-100 d-flex flex-column">
+            <div class="row h1">
+              <div class="col-1"></div>
+              <div class="col-3">
+                <div class="pc">
+                  <div class="diamond"></div>
+                  <div class="diamond1"></div>
+                </div>
+                <div class="h2" style="margin-left: 100px;margin-top: 25px;">
+                  医院his管理系统
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="d-flex justify-content-end">
+                  <div class="p-4 h3" style="height: 100%;" id="dept"></div>
+                  <div class="p-4 h3" id="pname"></div>
+                  <div class="p-2"><img src="../img/doc/dd.png" height="60px" style="margin-top: 2px;" />&nbsp;&nbsp;&nbsp;</div>
+                  <div style="width: 10px; border-right: 1px solid #DDDDDD;height: 60px;margin-top: 10px;"></div>
+                  <div class="p-4 h4" style="margin-top: 2px;cursor: hand;" onclick="location.href='../index.html'">
+                    退出登录
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row justify-content-center">
+        <div class="col-4"></div>
+        <div class="col-4 h5">王小二 男 34岁</div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row p-3">
+        <div class="col-md-3"></div>
+        <div class="col-md-5 w-100">
+          <input type="text" class="form-control" id="name" placeholder="请输入用户名" style="background:white;" />
+        </div>
+        <div class="col-md-4">
+          <div class="d-flex">
+            <div class=""><button type="button" class="btn btn-primary" id="add">扫卡</button>&nbsp;&nbsp;</div>
+            <div class=""><button type="button" class="btn border">&nbsp;&nbsp;读卡&nbsp;&nbsp;</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="d-flex justify-content-around">
+            <div class="h9">
+              <div class="media h-100">
+                <div class="d-flex flex-column align-self-center" style=" style="width: 150px;margin-left:9%">
+                  <div class="h10" style="margin-bottom: 10px;">
+                    王二小&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MZ00001
+                  </div>
+                  <div class="h10" style="margin-bottom: 10px;">男 &nbsp;&nbsp;&nbsp;&nbsp; 34岁</div>
+                  <div class="h10" style="margin-bottom: 10px;">挂号时间：2019-09-23 14:00</div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="h11">
+                <div class="media h-100">
+                  <div class="d-flex flex-column align-self-center" style="">
+                    <div class="h10" style="margin-bottom: 10px;">
+                      sdss&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MZ00001
+                    </div>
+                    <div class="h10" style="margin-bottom: 10px;">男 &nbsp;&nbsp;&nbsp;&nbsp; 34岁</div>
+                    <div class="h10" style="margin-bottom: 10px;">挂号时间：2019-09-23 14:00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-2 bg-primary">Flex item 3</div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </body>
+</html>
