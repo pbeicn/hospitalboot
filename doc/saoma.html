@@ -156,12 +156,48 @@
         console.log(data);
         $("#pname").html(data.doctorName);
         $("#dept").html(data.department);
-        var huanzhes = data.registerPatientDtoList;
-        for (let index = 0; index < huanzhes.length; index++) {
-          const huanzhe = huanzhes[index];
-        }
+        // var huanzhes = data.registerPatientDtoList;
+        // for (let index = 0; index < huanzhes.length; index++) {
+        //   const huanzhe = huanzhes[index];
+        // }
+      });
+      $("#add").click(function () {
+        $.ajax({
+          url: "http://localhost/api/v1/diagnose",
+          type: "POST",
+          headers: {
+            "Authorization": "Bearer" + localStorage.getItem("access_token"),
+            "X-CARD-CODE": $("#xcode").val()
+          },
+          contentType: "application/json; charset=UTF-8",
+          dataType: "json"
+        }).done(function (data, status, xhr) {
+          console.log(data);
+          $("#p1").html(data.patientname);
+          $("#p2").html(data.patientsex);
+          $("#p3").html(data.patientage);
+          getRecent();
+        });
+      });
+      $("#toMain").click(function () {
+        location.href = "main.html";
       });
     });
+    //获取最近三次诊断记录
+    function getRecent() {
+      $.ajax({
+        url: "http://localhost/api/v1/diagnose/recent",
+        type: "GET",
+        headers: {
+          "Authorization": "Bearer" + localStorage.getItem("access_token"),
+          "X-CARD-CODE": $("#xcode").val()
+        },
+        contentType: "application/json; charset=UTF-8",
+        dataType: "json"
+      }).done(function (data, status, xhr) {
+        console.log(data);
+      });
+    }
   </script>
 </head>
 
@@ -200,19 +236,21 @@
     <br />
     <div class="row justify-content-center">
       <div class="col-4"></div>
-      <div class="col-4 h5">王小二 男 34岁</div>
+      <div class="col-4 h5"><span id="p1"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+          id="p2"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="p3"></span></div>
       <div class="col-4"></div>
     </div>
     <div class="row p-3">
       <div class="col-md-3"></div>
       <div class="col-md-5 w-100">
-        <input type="text" class="form-control" id="name" placeholder="请输入用户名" style="background:white;" />
+        <input type="text" class="form-control" id="xcode" placeholder="请输入扫码" style="background:white;" />
       </div>
       <div class="col-md-4">
         <div class="d-flex">
           <div class=""><button type="button" class="btn btn-primary" id="add">扫卡</button>&nbsp;&nbsp;</div>
           <div class=""><button type="button" class="btn border">&nbsp;&nbsp;读卡&nbsp;&nbsp;</button></div>
-          <div class="">&nbsp;&nbsp;<button type="button" class="btn btn-primary" id="add">录入诊断</button>&nbsp;&nbsp;</div>
+          <div class="">&nbsp;&nbsp;<button type="button" class="btn btn-primary" id="toMain">录入诊断</button>&nbsp;&nbsp;
+          </div>
         </div>
       </div>
     </div>

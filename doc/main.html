@@ -198,36 +198,39 @@
                 $("#pname").html(data.doctorName);
                 $("#dept").html(data.department);
                 var huanzhes = data.registerPatientDtoList;
-                for (let index = 0; index < huanzhes.length; index++) {
-                    const huanzhe = huanzhes[index];
-                    let showcolor = "hhh";
-                    let fcolor = "hhh";
-                    if (index == 0) {
-                        showcolor = "h9";
-                        fcolor = "h10";
+                if (huanzhes && huanzhes.length > 0) {
+                    for (let index = 0; index < huanzhes.length; index++) {
+                        const huanzhe = huanzhes[index];
+                        let showcolor = "hhh";
+                        let fcolor = "hhh";
+                        if (index == 0) {
+                            showcolor = "h9";
+                            fcolor = "h10";
+                        }
+                        else {
+                            showcolor = "h11";
+                            fcolor = "h101";
+                        }
+                        $huzhelist = "<div class='d-flex justify-content-center'>";
+                        $huzhelist += "<div class='" + showcolor + "'>";
+                        $huzhelist += "<div class='media h-100'>";
+                        $huzhelist += "<div class='d-flex flex-column align-self-center' style='margin-left:9%'>";
+                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>";
+                        $huzhelist += huanzhe.pname + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MZ00001";
+                        $huzhelist += "</div>";
+                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>" + huanzhe.sex + " &nbsp;&nbsp;&nbsp;&nbsp;";
+                        $huzhelist += huanzhe.age + "岁";
+                        $huzhelist += "</div>";
+                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>挂号时间：" + huanzhe.startTime;
+                        $huzhelist += "</div>";
+                        $huzhelist += "</div>";
+                        $huzhelist += "</div>";
+                        $huzhelist += "</div>";
+                        $huzhelist += "</div><br>";
+                        $("#hzs").append($huzhelist);
                     }
-                    else {
-                        showcolor = "h11";
-                        fcolor = "h101";
-                    }
-                    $huzhelist = "<div class='d-flex justify-content-center'>";
-                    $huzhelist += "<div class='" + showcolor + "'>";
-                    $huzhelist += "<div class='media h-100'>";
-                    $huzhelist += "<div class='d-flex flex-column align-self-center' style='margin-left:9%'>";
-                    $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>";
-                    $huzhelist += huanzhe.pname + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MZ00001";
-                    $huzhelist += "</div>";
-                    $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>" + huanzhe.sex + " &nbsp;&nbsp;&nbsp;&nbsp;";
-                    $huzhelist += huanzhe.age + "岁";
-                    $huzhelist += "</div>";
-                    $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>挂号时间：" + huanzhe.startTime;
-                    $huzhelist += "</div>";
-                    $huzhelist += "</div>";
-                    $huzhelist += "</div>";
-                    $huzhelist += "</div>";
-                    $huzhelist += "</div><br>";
-                    $("#hzs").append($huzhelist);
                 }
+
             })
             // $("input[name='all']").click(function () {
             //     alert(1);

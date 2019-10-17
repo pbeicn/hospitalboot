@@ -80,8 +80,8 @@
     <script type="text/javascript">
         $(function () {
             $.ajax({
-                url: "http://localhost/api/v1/ecard",
-                type: "GET",
+                url: "http://localhost/api/v1/card",
+                type: "POST",
                 headers: {
                     Authorization: "Bearer" + localStorage.getItem("access_token")
                 },
@@ -94,15 +94,40 @@
                 }
             }).done(function (data, status, xhr) {
                 console.log(data);
-                if (data.vid != "" || data.vid != null) {
-                    $("#code").qrcode({
-                        render: "table",
-                        width: $('#aaa').width() * 0.7,
-                        height: $('#aaa').height() * 0.8,
-                        text: data.vid
-                    });
-                    $("#vid").html(data.vid);
-                }
+                $.ajax({
+                    url: "http://localhost/api/v1/card",
+                    type: "GET",
+                    headers: {
+                        Authorization: "Bearer" + localStorage.getItem("access_token")
+                    },
+                    contentType: 'application/json; charset=UTF-8',
+                    // data: JSON.stringify(user),
+                    dataType: "json",
+                    error: function (xhr) {
+                        console.log(xhr);
+                        return false;
+                    }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    if (data.vid != "" || data.vid != null) {
+                        $("#code").qrcode({
+                            render: "table",
+                            width: $('#aaa').width() * 0.7,
+                            height: $('#aaa').height() * 0.8,
+                            text: data.code
+                        });
+                        $("#vid").html(data.code);
+                    }
+                })
+                // if (data.vid != "" || data.vid != null) {
+                //     $("#code").qrcode({
+                //         render: "table",
+                //         width: $('#aaa').width() * 0.7,
+                //         height: $('#aaa').height() * 0.8,
+                //         text: data.vid
+                //     });
+                //     $("#vid").html(data.vid);
+                // }
             })
 
         });
