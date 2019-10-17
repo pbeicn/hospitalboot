@@ -232,15 +232,6 @@
                 }
 
             })
-            // $("input[name='all']").click(function () {
-            //     alert(1);
-            // var flag = this.checked;
-
-            // $("input[name='check']").each(function () {
-            //     // 将获取的状态赋值给当前对象，
-            //     this.checked = flag;
-            // });
-            // });
             $("#a1").click(function () {
                 which = "1";
                 $("#a1").css("color", "#1890FF").css("border-bottom", "2px solid #1890FF");
@@ -289,6 +280,10 @@
             });
             $("#a2").css("color", "#1890FF").css("border-bottom", "2px solid #1890FF");
             $("#iiin").load("check.html");
+
+            $("#p1").html(localStorage.getItem("patientname"));
+            $("#p2").html(localStorage.getItem("patientsex"));
+            $("#p3").html(localStorage.getItem("patientage"));
         });
         function checkAll(val) {
             $("input[name='dmm']").each(function () {
@@ -416,14 +411,14 @@
                                 <div class="d-flex p-2 w-100" style="border-bottom: 1px solid #dddddd;">
                                     <div class="d-flex align-self-center h5" style="width:60%;">
                                         <div>患者信息</div>
-                                        <div style="font-size:16px;margin-left:80px;margin-top:3px;">
+                                        <div style="font-size:16px;margin-left:80px;margin-top:3px;" id="p1">
                                             王小二
                                         </div>
                                         <div style="font-size:16px;margin-left:50px;margin-top:3px;">
                                             MZ000001</div>
-                                        <div style="font-size:16px;margin-left:50px;margin-top:3px;">男
+                                        <div style="font-size:16px;margin-left:50px;margin-top:3px;" id="p2">男
                                         </div>
-                                        <div style="font-size:16px;margin-left:50px;margin-top:3px;">34
+                                        <div style="font-size:16px;margin-left:50px;margin-top:3px;" id="p3">34
                                         </div>
                                     </div>
                                     <div class="align-self-center justify-content-end w-30 h5"
