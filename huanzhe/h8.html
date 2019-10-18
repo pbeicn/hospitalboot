@@ -78,7 +78,7 @@
         $(function () {
             $("#ggg").click(function () {
                 $.ajax({
-                    url: "http://localhost/api/v1/register/" + $("#name").val(),
+                    url: "/api/v1/register/" + $("#name").val(),
                     type: "GET",
                     headers: {
                         Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -119,7 +119,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="name" class="h4">临时填写:</label>
-                    <input type="text" class="form-contro" id="name" placeholder="请填写医生二维码">
+                    <input type="text" class="form-contro" id="name" placeholder="18461783365189632">
                     <button type="button" class="btn btn-primary" id="ggg">保存诊断</button>
                 </div>
             </div>

@@ -90,7 +90,7 @@
             $("#getC").click(function () {
                 // alert("Bearer" + localStorage.getItem("access_token"));
                 $.ajax({
-                    url: "http://localhost/api/v1/ecard",
+                    url: "/api/v1/ecard",
                     type: "POST",
                     headers: {
                         Authorization: "Bearer" + localStorage.getItem("access_token")

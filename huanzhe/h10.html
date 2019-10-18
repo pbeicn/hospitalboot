@@ -112,7 +112,7 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            Mock.mock('http://localhost/api/v1/diagnose/id', 'get', {
+            Mock.mock('/api/v1/diagnose/id', 'get', {
                 "checkDTOS": [
                     {
                         "aka130": "string",
@@ -194,7 +194,7 @@
             var searchData = searchUrl.split("=");
             var sid = searchData[1];
             $.ajax({
-                url: "http://localhost/api/v1/diagnose/id",
+                url: "/api/v1/diagnose/id",
                 type: "GET",
                 headers: {
                     "Authorization": "Bearer" + localStorage.getItem("access_token"),

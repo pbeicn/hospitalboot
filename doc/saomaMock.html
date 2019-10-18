@@ -144,7 +144,7 @@
     var dsindex = 1;
     var checkmoney = 100;
     $(function () {
-      Mock.mock('http://localhost/api/v1/doctor1', 'get', {
+      Mock.mock('/api/v1/doctor1', 'get', {
         "count": "string",
         "department|1": ['心内科', '神经外科', '呼吸内科'],
         "doctorName": "@CNAME",
@@ -158,7 +158,7 @@
           "startTime": "string"
         }]
       })
-      Mock.mock('http://localhost/api/v1/diagnose/recent', 'get', {
+      Mock.mock('/api/v1/diagnose/recent', 'get', {
         'data|1-3': [{
           "checkDTOS|3-6": [{
             "aka130": "string",
@@ -211,7 +211,7 @@
           "totalmoney": "string"
         }]
       })
-      Mock.mock('http://localhost/api/v1/diagnose', 'post', {
+      Mock.mock('/api/v1/diagnose', 'post', {
         "checkDTOS": [{
           "aka130": "string",
           "department": "string",
@@ -261,7 +261,7 @@
         "totalmoney": "string"
       })
       $.ajax({
-        url: "http://localhost/api/v1/doctor1",
+        url: "/api/v1/doctor1",
         type: "GET",
         headers: {
           Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -279,7 +279,7 @@
       });
       $("#add").click(function () {
         $.ajax({
-          url: "http://localhost/api/v1/diagnose",
+          url: "/api/v1/diagnose",
           type: "POST",
           headers: {
             "Authorization": "Bearer" + localStorage.getItem("access_token"),
@@ -313,7 +313,7 @@
     //获取最近三次诊断记录
     function getRecent() {
       $.ajax({
-        url: "http://localhost/api/v1/diagnose/recent",
+        url: "/api/v1/diagnose/recent",
         type: "GET",
         headers: {
           "Authorization": "Bearer" + localStorage.getItem("access_token"),
@@ -380,7 +380,7 @@
               $("#checks").empty();
               cccList.forEach(element => {
                 $checklist = "<div class='p-2'><div class='card'>";
-                $checklist += "<div class='card-body' style='width: 450px;'>";
+                $checklist += "<div class='card-body' style='width: 320px;'>";
                 $checklist += "<div class='d-flex flex-column'>";
                 $checklist += "<div class='p-1'>";
                 $checklist += "<div class='d-flex justify-content-start'>";
@@ -569,7 +569,7 @@
       <div class="col-md-1"></div>
       <div class="col-md-10">
         <div id="checks" class="d-flex justify-content-start mb-3"
-          style="flex-wrap: wrap;background: white;text-align: center; padding-left: 5%;position: relative;">
+          style="flex-wrap: wrap;background: white;text-align: center; padding-left: 4%;position: relative;">
           <!-- <div class="p-2"> -->
           <!-- <div class="card">
               <div class="card-body" style="width: 450px;">

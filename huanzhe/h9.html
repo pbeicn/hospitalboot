@@ -136,11 +136,11 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            Mock.mock('http://localhost/api/v1/code', 'get', {
+            Mock.mock('/api/v1/code', 'get', {
                 "pname": "@CNAME",
                 "idcardno": "@ID"
             })
-            Mock.mock('http://localhost/api/v1/diagnose/recent', 'get', [
+            Mock.mock('/api/v1/diagnose/recent', 'get', [
                 {
                     "checkDTOS": [
                         {
@@ -249,7 +249,7 @@
                 }
             ])
             $.ajax({
-                url: "http://localhost/api/v1/code",
+                url: "/api/v1/code",
                 type: "GET",
                 // headers: {
                 //     Authorization: "Beareraaa"
@@ -262,7 +262,7 @@
                 $("#u2").html(localStorage.getItem("idcard"));
             })
             $.ajax({
-                url: "http://localhost/api/v1/diagnose/recent",
+                url: "/api/v1/diagnose/recent",
                 type: "GET",
                 headers: {
                     "Authorization": "Bearer" + localStorage.getItem("access_token"),

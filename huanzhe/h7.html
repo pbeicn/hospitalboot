@@ -80,7 +80,7 @@
     <script type="text/javascript">
         $(function () {
             $.ajax({
-                url: "http://localhost/api/v1/card",
+                url: "/api/v1/card",
                 type: "POST",
                 headers: {
                     Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -95,7 +95,7 @@
             }).done(function (data, status, xhr) {
                 console.log(data);
                 $.ajax({
-                    url: "http://localhost/api/v1/card",
+                    url: "/api/v1/card",
                     type: "GET",
                     headers: {
                         Authorization: "Bearer" + localStorage.getItem("access_token")

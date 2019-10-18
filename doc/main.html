@@ -117,7 +117,7 @@
 
         .h9 {
             width: 85%;
-            height: 145px;
+            height: 110px;
             background: rgba(135, 182, 242, 1);
             box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
             border-radius: 2px;
@@ -143,7 +143,7 @@
 
         .h11 {
             width: 85%;
-            height: 145px;
+            height: 110px;
             background: rgba(255, 255, 255, 1);
             box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.09);
             border-radius: 2px;
@@ -151,7 +151,7 @@
 
         .h12 {
             width: 88%;
-            height: 43px;
+            height: 38px;
             background: rgba(0, 144, 255, 1);
             border-radius: 4px;
         }
@@ -186,7 +186,7 @@
         var checkmoney = 100;
         $(function () {
             $.ajax({
-                url: "http://localhost/api/v1/doctor1",
+                url: "/api/v1/doctor1",
                 type: "GET",
                 headers: {
                     Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -216,18 +216,18 @@
                         $huzhelist += "<div class='" + showcolor + "'>";
                         $huzhelist += "<div class='media h-100'>";
                         $huzhelist += "<div class='d-flex flex-column align-self-center' style='margin-left:9%'>";
-                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>";
+                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 5px;'>";
                         $huzhelist += huanzhe.pname + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MZ00001";
                         $huzhelist += "</div>";
-                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>" + huanzhe.sex + " &nbsp;&nbsp;&nbsp;&nbsp;";
+                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 5px;'>" + huanzhe.sex + " &nbsp;&nbsp;&nbsp;&nbsp;";
                         $huzhelist += huanzhe.age + "岁";
                         $huzhelist += "</div>";
-                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>挂号时间：" + huanzhe.startTime;
+                        $huzhelist += "<div class='" + fcolor + "' style='margin-bottom: 5px;'>挂号时间：" + huanzhe.startTime;
                         $huzhelist += "</div>";
                         $huzhelist += "</div>";
                         $huzhelist += "</div>";
                         $huzhelist += "</div>";
-                        $huzhelist += "</div><br>";
+                        $huzhelist += "</div><div style='height:10px;width:100%'></div>";
                         $("#hzs").append($huzhelist);
                     }
                 }
@@ -322,19 +322,41 @@
                     $("input[name*='dmm']").each(function () {
                         let tmpid = $(this).attr("vid");
                         let medicineDTO = new Object();
-                        medicineDTO.brandname = "";
-                        medicineDTO.dosageform = "";
-                        medicineDTO.dosesiz = "";
-                        medicineDTO.frequency = "";
+                        medicineDTO.brandname = $("#dib" + tmpid).val();
+                        medicineDTO.dosageform = $("#did" + tmpid).val();
+                        medicineDTO.dosesiz = $("#die" + tmpid).val();
+                        medicineDTO.frequency = $("#dif" + tmpid).val();
                         medicineDTO.id = "MED" + tmpid;
-                        medicineDTO.medicinecnt = "";
-                        medicineDTO.medicinename = "";
-                        medicineDTO.medicinesize = "";
-                        medicineDTO.money = "";
+                        medicineDTO.medicinecnt = $("#dig" + tmpid).val();
+                        medicineDTO.medicinename = $("#dia" + tmpid).val();
+                        medicineDTO.medicinesize = "2ml";
+                        medicineDTO.money = $("#dih" + tmpid).val();
                         medicineDTO.remark = "";
-                        medicineDTO.sellpackage = "";
+                        medicineDTO.sellpackage = $("#dic" + tmpid).val();
                         medicines.push(medicineDTO);
                     })
+                    drugDTO.medicine = medicines;
+                    console.log(drugDTO);
+                    //保存处方
+                    $.ajax({
+                        url: "/api/v1/diagnose/" + localStorage.getItem("diaID") + "/recipe",
+                        type: "POST",
+                        headers: {
+                            "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                            "X-CARD-CODE": localStorage.getItem("X-CARD-CODE")
+                        },
+                        data: JSON.stringify(drugDTO),
+                        contentType: "application/json; charset=UTF-8",
+                        dataType: "json",
+                        error: function (xhr) {
+                            console.log(xhr);
+                            getHao(xhr.responseJSON.message);
+                            return false;
+                        }
+                    }).done(function (data, status, xhr) {
+                        console.log(data);
+                        getHao(data.message);
+                    });
                 }
                 //开检查
                 else {
@@ -359,7 +381,7 @@
                     console.log(chinfos);
                     //保存检查
                     $.ajax({
-                        url: "http://localhost/api/v1/diagnose/" + localStorage.getItem("diaID") + "/check",
+                        url: "/api/v1/diagnose/" + localStorage.getItem("diaID") + "/check",
                         type: "POST",
                         headers: {
                             "Authorization": "Bearer" + localStorage.getItem("access_token"),
@@ -379,6 +401,50 @@
                     });
                 }
             });
+            //保存诊断
+            $("#saveZD").click(function () {
+                $.ajax({
+                    url: "/api/v1/diagnose/" + localStorage.getItem("diaID") + "/info?information=" + $("#comment1").val(),
+                    type: "POST",
+                    headers: {
+                        "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                        "X-CARD-CODE": localStorage.getItem("X-CARD-CODE")
+                    },
+                    // data: JSON.stringify(chinfos),
+                    contentType: "application/json; charset=UTF-8",
+                    dataType: "json",
+                    error: function (xhr) {
+                        // console.log(xhr);
+                        getHao(xhr.responseJSON.message);
+                        return false;
+                    }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    getHao(data.message);
+                });
+            })
+            //结束诊断
+            $("#finishZD").click(function () {
+                $.ajax({
+                    url: "/api/v1/diagnose/" + localStorage.getItem("diaID"),
+                    type: "POST",
+                    headers: {
+                        "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                        "X-CARD-CODE": localStorage.getItem("X-CARD-CODE")
+                    },
+                    // data: JSON.stringify(chinfos),
+                    contentType: "application/json; charset=UTF-8",
+                    dataType: "json",
+                    error: function (xhr) {
+                        // console.log(xhr);
+                        getHao(xhr.responseJSON.message);
+                        return false;
+                    }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    getHao(data.message);
+                });
+            })
             $("#a2").css("color", "#1890FF").css("border-bottom", "2px solid #1890FF");
             $("#iiin").load("check.html");
 
@@ -470,7 +536,6 @@
                                 <!-- <button type="button" class="btn btn-primary" style="width:100px;height: 40px;">搜
                                             索</button> -->
                             </div>
-                            <br>
                             <div id="hzs">
                                 <!-- <div class="d-flex justify-content-center">
                                     <div class="h9">
@@ -507,7 +572,7 @@
                                     </div>
                                 </div> -->
                             </div>
-                            <div class="h12" style="position: absolute;left:6%; top: 92%;text-align: center;">
+                            <div class="h12" style="position: absolute;left:6%; top: 94%;text-align: center;">
                                 <div class="h13" style="margin-top: 2%;">历史就诊人员</div>
                             </div>
                         </div>
@@ -543,7 +608,7 @@
                                                     </div>
                                                     <div class="form-group" style="width:100%">
                                                         <textarea class="form-control" style="width:90%" rows="2"
-                                                            id="comment"></textarea>
+                                                            id="comment1"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -556,7 +621,7 @@
                                                     </div>
                                                     <div class="form-group" style="width:100%">
                                                         <textarea class="form-control" style="width:90%" rows="2"
-                                                            id="comment"></textarea>
+                                                            id="comment2"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -565,10 +630,10 @@
                                 </div>
                                 <div class="d-flex justify-content-end" style="position: absolute;left:72%;top:80%">
                                     <div class="p-1" style="width:110px">
-                                        <button type="button" class="btn btn-primary">保存诊断</button>
+                                        <button type="button" id="saveZD" class="btn btn-primary">保存诊断</button>
                                     </div>
                                     <div class="p-1" style="width:110px">
-                                        &nbsp;&nbsp;<button type="button" class="btn"
+                                        &nbsp;&nbsp;<button id="finishZD" type="button" class="btn"
                                             style="border:1px solid #108EE9;color:#108EE9">结束诊断</button></div>
                                 </div>
                             </div>

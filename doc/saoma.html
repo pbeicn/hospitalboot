@@ -144,124 +144,8 @@
     var dsindex = 1;
     var checkmoney = 100;
     $(function () {
-      // Mock.mock('http://localhost/api/v1/doctor1', 'get', {
-      //   "count": "string",
-      //   "department|1": ['心内科', '神经外科', '呼吸内科'],
-      //   "doctorName": "@CNAME",
-      //   "grade": "string",
-      //   "location": "string",
-      //   "registerPatientDtoList": [{
-      //     "age": "string",
-      //     "pname": "string",
-      //     "queueNum": "string",
-      //     "sex": "string",
-      //     "startTime": "string"
-      //   }]
-      // })
-      // Mock.mock('http://localhost/api/v1/diagnose/recent', 'get', {
-      //   'data|1-3': [{
-      //     "checkDTOS|3-6": [{
-      //       "aka130": "string",
-      //       "department|1": ["放射科", "检验科", "神经外科"],
-      //       "description|1": ["巨噬细胞吞噬功能试验", "溶菌酶测定", "普通视力检查"],
-      //       "diagnosecode": "string",
-      //       "id": "string",
-      //       "money": "string",
-      //       "patientage": "@date(yyyy-mm-dd) @time(hh-mm-ss)",
-      //       "patientidcard": "string",
-      //       "patientname": "string",
-      //       "patientsex": "string",
-      //       "result": "string"
-      //     }],
-      //     "checkmoney": "string",
-      //     "drugmoney": "string",
-      //     "endtime": "string",
-      //     "id": "string",
-      //     "patientage": "string",
-      //     "patientidcard": "string",
-      //     "patientname": "string",
-      //     "patientsex": "string",
-      //     "recipe": {
-      //       "aka130": "string",
-      //       "department": "string",
-      //       "diagnosecode": "string",
-      //       "medicine|3-6": [{
-      //         "brandname|1": ['康宁药业', '裕源药业', '海王', '恒诚制药', '河北恒利'],
-      //         "dosageform|1": ['粉剂', '外用溶液', '肠溶片', '控释制剂'],
-      //         "dosesiz": "string",
-      //         "frequency|1": ['1次', '两次', '三次', '四次'],
-      //         "id": "string",
-      //         "medicinecnt|1": [3, 1, 4, 7],
-      //         "medicinename|1": ['乌鸡白凤丸', '氯化钾注射剂', '维生素K4片剂', '美沙芬片剂', '诺氟沙星滴眼剂', '阿魏酸钠', '丁溴东莨菪碱胶囊'],
-      //         "medicinesize": "string",
-      //         "money|1": [20, 30, 50.8, 77.9],
-      //         "remark": "string",
-      //         "sellpackage|1": ['盒', '片', '包', '颗粒']
-      //       }],
-      //       "patientAge": "string",
-      //       "patientIdcard": "string",
-      //       "patientName": "string",
-      //       "patientSex": "string"
-      //     },
-      //     "docname": "@CNAME",
-      //     "docdept|1": ['心内科丨副主任医师', '神经外科丨主任医师', '呼吸内科丨主治医师'],
-      //     "result|1": ['诊断结果：流行性感冒&nbsp;&nbsp;&nbsp;&nbsp;￥100.00', '诊断结果：结膜炎&nbsp;&nbsp;&nbsp;&nbsp;￥200.00', '诊断结果：肺炎&nbsp;&nbsp;&nbsp;&nbsp;￥400.00'],
-      //     "starttime": "@date(yyyy-mm-dd) @time(hh-mm-ss)",
-      //     "state": "string",
-      //     "totalmoney": "string"
-      //   }]
-      // })
-      // Mock.mock('http://localhost/api/v1/diagnose', 'post', {
-      //   "checkDTOS": [{
-      //     "aka130": "string",
-      //     "department": "string",
-      //     "description": "string",
-      //     "diagnosecode": "string",
-      //     "id": "string",
-      //     "money": "string",
-      //     "patientage": "string",
-      //     "patientidcard": "string",
-      //     "patientname": "string",
-      //     "patientsex": "string",
-      //     "result": "string"
-      //   }],
-      //   "checkmoney": "string",
-      //   "drugmoney": "string",
-      //   "endtime": "string",
-      //   "id": "string",
-      //   "patientage|1-60": 25,
-      //   "patientidcard": "string",
-      //   "patientname": "@CNAME",
-      //   "patientsex|1": ["男", "女"],
-      //   "recipe": {
-      //     "aka130": "string",
-      //     "department": "string",
-      //     "diagnosecode": "string",
-      //     "medicine": [{
-      //       "brandname": "string",
-      //       "dosageform": "string",
-      //       "dosesiz": "string",
-      //       "frequency": "string",
-      //       "id": "string",
-      //       "medicinecnt": "string",
-      //       "medicinename": "string",
-      //       "medicinesize": "string",
-      //       "money": "string",
-      //       "remark": "string",
-      //       "sellpackage": "string"
-      //     }],
-      //     "patientAge": "string",
-      //     "patientIdcard": "string",
-      //     "patientName": "string",
-      //     "patientSex": "string"
-      //   },
-      //   "result": "string",
-      //   "starttime": "string",
-      //   "state": "string",
-      //   "totalmoney": "string"
-      // })
       $.ajax({
-        url: "http://localhost/api/v1/doctor1",
+        url: "/api/v1/doctor1",
         type: "GET",
         headers: {
           Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -279,7 +163,7 @@
       });
       $("#add").click(function () {
         $.ajax({
-          url: "http://localhost/api/v1/diagnose",
+          url: "/api/v1/diagnose",
           type: "POST",
           headers: {
             "Authorization": "Bearer" + localStorage.getItem("access_token"),
@@ -313,7 +197,7 @@
     //获取最近三次诊断记录
     function getRecent() {
       $.ajax({
-        url: "http://localhost/api/v1/diagnose/recent",
+        url: "/api/v1/diagnose/recent",
         type: "GET",
         headers: {
           "Authorization": "Bearer" + localStorage.getItem("access_token"),
@@ -322,12 +206,13 @@
         contentType: "application/json; charset=UTF-8",
         dataType: "json"
       }).done(function (data, status, xhr) {
+        debugger;
         console.log(data);
         $("#indocs").empty();
-        let ddd = data['data'];
-        if (ddd && ddd.length > 0) {
-          for (let index = 0; index < ddd.length; index++) {
-            const element = ddd[index];
+        // let ddd = data['data'];
+        if (data && data.length > 0) {
+          for (let index = 0; index < data.length; index++) {
+            const element = data[index];
             let showcolor = "hhh";
             let fcolor = "hhh";
             if (index == 0) {
@@ -342,10 +227,10 @@
             $docslist += "<div class='media h-100'>";
             $docslist += "<div class='d-flex flex-column align-self-center' style='margin-left:9%'>";
             $docslist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>";
-            $docslist += element.docname + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + element.docdept;
+            $docslist += "蒋圣蓉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;副主任医师";
             $docslist += "</div>";
             $docslist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>" + element.starttime + "</div>";
-            $docslist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>" + element.result;
+            $docslist += "<div class='" + fcolor + "' style='margin-bottom: 10px;'>" + "上呼吸道感染";
             $docslist += "</div>";
             $docslist += "</div>";
             $docslist += "</div>";
@@ -355,75 +240,81 @@
             if (index == 0) {
               //处方
               $("#drugs").empty();
-              let medicineList = element.recipe.medicine;
-              let drugM = 0;
-              medicineList.forEach(list => {
-                var num = list.medicinecnt * list.money;
-                num = num.toFixed(2);
-                drugM = parseFloat(drugM) + parseFloat(num);
-                $druglist = "<tr>";
-                $druglist += " <th>" + list.medicinename + "</th>";
-                $druglist += "<th>" + list.brandname + "</th>";
-                $druglist += " <th>" + list.sellpackage + "</th>";
-                $druglist += " <th>" + list.dosageform + "</th>";
-                $druglist += " <th>2次/日</th>";
-                $druglist += " <th>" + list.frequency + "</th>";
-                $druglist += " <th>" + list.medicinecnt + "</th>";
-                $druglist += " <th>" + list.money + "</th>";
-                $druglist += " <th nowrap>" + num + "</th>";
-                $druglist += " </tr>";
-                $("#drugs").append($druglist);
-              });
-              $("#dmm").html("￥" + drugM.toFixed(2));
+              if (element.recipe) {
+                if (element.recipe.medicine) {
+                  let medicineList = element.recipe.medicine;
+                  let drugM = 0;
+                  medicineList.forEach(list => {
+                    var num = list.medicinecnt * list.money;
+                    num = num.toFixed(2);
+                    drugM = parseFloat(drugM) + parseFloat(num);
+                    $druglist = "<tr>";
+                    $druglist += " <th>" + list.medicinename + "</th>";
+                    $druglist += "<th>" + list.brandname + "</th>";
+                    $druglist += " <th>" + list.sellpackage + "</th>";
+                    $druglist += " <th>" + list.dosageform + "</th>";
+                    $druglist += " <th>2次/日</th>";
+                    $druglist += " <th>" + list.frequency + "</th>";
+                    $druglist += " <th>" + list.medicinecnt + "</th>";
+                    $druglist += " <th>" + list.money + "</th>";
+                    $druglist += " <th nowrap>" + num + "</th>";
+                    $druglist += " </tr>";
+                    $("#drugs").append($druglist);
+                  });
+                  $("#dmm").html("￥" + drugM.toFixed(2));
+                }
+              }
               //检查
-              let cccList = element.checkDTOS;
-              $("#checks").empty();
-              cccList.forEach(element => {
-                $checklist = "<div class='p-2'><div class='card'>";
-                $checklist += "<div class='card-body' style='width: 450px;'>";
-                $checklist += "<div class='d-flex flex-column'>";
-                $checklist += "<div class='p-1'>";
-                $checklist += "<div class='d-flex justify-content-start'>";
-                $checklist += "<div class='p-1'><img src='../img/doc/c1.png'></div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += "<label for='sel1' style='width: 80px;'>项目名称:</label>";
-                $checklist += "</div>";
-                $checklist += "<div>";
-                $checklist += "<select class='form-control' id='sel1'>";
-                $checklist += "<option>" + element.description + "</option>";
-                $checklist += "<option>肠毒素检测</option>";
-                $checklist += "<option>血液弓形虫检查</option>";
-                $checklist += "</select>";
-                $checklist += "</div>";
-                $checklist += " </div > ";
-                $checklist += "</div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += "<div class='d-flex justify-content-start'>";
-                $checklist += "<div class='p-1'><img src='../img/doc/c2.png'></div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += "<label for='sel1' style='width: 80px;'>检查科室：</label>";
-                $checklist += "</div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += element.department;
-                $checklist += "</div>";
-                $checklist += "</div>";
-                $checklist += "</div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += "<div class='d-flex justify-content-start' style='position:relative;'>";
-                $checklist += "<div class='p-1'><img src='../img/doc/c3.png'></div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += "<label for='sel1' style='width: 80px;'>检查时间：</label>";
-                $checklist += "</div>";
-                $checklist += "<div class='p-1'>";
-                $checklist += element.patientage;
-                $checklist += "</div>";
-                $checklist += "</div>";
-                $checklist += "</div>";
-                $checklist += "</div>";
-                $checklist += "</div>";
-                $checklist += "</div></div>";
-                $("#checks").append($checklist);
-              });
+              if (element.checkDTOS) {
+                let cccList = element.checkDTOS;
+                $("#checks").empty();
+                cccList.forEach(element => {
+                  $checklist = "<div class='p-2'><div class='card'>";
+                  $checklist += "<div class='card-body' style='width: 450px;'>";
+                  $checklist += "<div class='d-flex flex-column'>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += "<div class='d-flex justify-content-start'>";
+                  $checklist += "<div class='p-1'><img src='../img/doc/c1.png'></div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += "<label for='sel1' style='width: 80px;'>项目名称:</label>";
+                  $checklist += "</div>";
+                  $checklist += "<div>";
+                  $checklist += "<select class='form-control' id='sel1'>";
+                  $checklist += "<option>" + element.description + "</option>";
+                  $checklist += "<option>肠毒素检测</option>";
+                  $checklist += "<option>血液弓形虫检查</option>";
+                  $checklist += "</select>";
+                  $checklist += "</div>";
+                  $checklist += " </div > ";
+                  $checklist += "</div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += "<div class='d-flex justify-content-start'>";
+                  $checklist += "<div class='p-1'><img src='../img/doc/c2.png'></div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += "<label for='sel1' style='width: 80px;'>检查科室：</label>";
+                  $checklist += "</div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += element.department;
+                  $checklist += "</div>";
+                  $checklist += "</div>";
+                  $checklist += "</div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += "<div class='d-flex justify-content-start' style='position:relative;'>";
+                  $checklist += "<div class='p-1'><img src='../img/doc/c3.png'></div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += "<label for='sel1' style='width: 80px;'>检查时间：</label>";
+                  $checklist += "</div>";
+                  $checklist += "<div class='p-1'>";
+                  $checklist += element.patientage;
+                  $checklist += "</div>";
+                  $checklist += "</div>";
+                  $checklist += "</div>";
+                  $checklist += "</div>";
+                  $checklist += "</div>";
+                  $checklist += "</div></div>";
+                  $("#checks").append($checklist);
+                });
+              }
               $("#checks").append("<div class='p-2 w-100' style='text-align: right;background: white;'>合计:<span style='color: red;' id='cmm'>￥800.00</div>");
             }
           }

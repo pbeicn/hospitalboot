@@ -95,7 +95,7 @@
             color: rgba(51, 51, 51, 1);
             line-height: 50px;
             margin-top: 40px;
-            margin-left: 20px;
+            /* margin-left: 60px; */
         }
 
         .h10 {
@@ -107,13 +107,13 @@
             color: rgba(51, 51, 51, 1);
             line-height: 40px;
             margin-top: 42px;
-            margin-left: 20px;
+            /*margin-left: 20px; */
         }
     </style>
     <script type="text/javascript">
         $(function () {
             var docID = localStorage.getItem("docID");
-            // Mock.mock('http://localhost/api/v1/docinfo', 'get', {
+            // Mock.mock('/api/v1/docinfo', 'get', {
             //     "certificate": "@NAME",
             //     "count": "@NAME",
             //     "department": "@NAME",
@@ -125,7 +125,7 @@
             // })
             //获取医生信息
             $.ajax({
-                url: "http://localhost/api/v1/doctor/" + docID,
+                url: "/api/v1/doctor/" + docID,
                 type: "GET",
                 // headers: {
                 //     Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -140,7 +140,7 @@
             })
             //获取医生二维码
             $.ajax({
-                url: "http://localhost/api/v1/register/" + docID,
+                url: "/api/v1/register/" + docID,
                 type: "POST",
                 // headers: {
                 //     Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -190,15 +190,19 @@
                             <td style="width:10%;height: 100%;">
                             <td style="width:45%;height: 100%;">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div style="text-align: center"><img src='../img/h23.png'></div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="h9" id="docName"></div>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="h10" id="docGrade"></div>
-                                    </div>
+                                    <table style="width:100%;height: 100%;">
+                                        <tr>
+                                            <td>
+                                                <div><img src='../img/h23.png'></div>
+                                            </td>
+                                            <td>
+                                                <div class="h9" id="docName"></div>
+                                            </td>
+                                            <td>
+                                                <div class="h10" id="docGrade"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <br><br>
                                 <div class="row">

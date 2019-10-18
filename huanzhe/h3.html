@@ -130,11 +130,11 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            // Mock.mock('http://localhost/api/v1/code', 'get', {
+            // Mock.mock('/api/v1/code', 'get', {
             //     "pname": "@CNAME"
             // })
             $.ajax({
-                url: "http://localhost/api/v1/pname",
+                url: "/api/v1/pname",
                 type: "GET",
                 headers: {
                     Authorization: "Bearer" + localStorage.getItem("access_token")
@@ -149,7 +149,7 @@
             $("#toCard").click(function () {
                 //判断是否已申领过就诊卡
                 $.ajax({
-                    url: "http://localhost/api/v1/ecard",
+                    url: "/api/v1/ecard",
                     type: "GET",
                     headers: {
                         Authorization: "Bearer" + localStorage.getItem("access_token")
