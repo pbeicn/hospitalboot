@@ -199,6 +199,7 @@
                 $("#dept").html(data.department);
                 var huanzhes = data.registerPatientDtoList;
                 if (huanzhes && huanzhes.length > 0) {
+                    $("#ghnum").html(huanzhes.length);
                     for (let index = 0; index < huanzhes.length; index++) {
                         const huanzhe = huanzhes[index];
                         let showcolor = "hhh";
@@ -250,7 +251,7 @@
                 //开处方
                 if (which == "1") {
                     $drug = "<tr>";
-                    $drug += "<td align='right'><input name='dmm' type='checkbox' style='margin-top:15px' value='' id='dim0'></td>";
+                    $drug += "<td align='right'><input name='dmm' vid='" + dsindex + "' type='checkbox' style='margin-top:15px' value='' id='dim0'></td>";
                     $drug += "<td><input type='text' class='form-control' id='dia" + dsindex + "'></td>";
                     $drug += "<td><input type='text' class='form-control' id='dib" + dsindex + "'></td>";
                     $drug += "<td><input type='text' class='form-control' id='dic" + dsindex + "'></td>";
@@ -267,8 +268,10 @@
                 //开检查
                 else {
                     // $("#checks").append($("#ch1").clone());
-                    var strVar = $("#ch0").clone(true); //克隆元素,注意不是javascript的cloneNode()
+                    var strVar = $("#ch0").clone(true); //克隆元素,注意不是javascript的cloneNode() name="checkList"
                     strVar.attr("id", "ch" + chindex);
+                    strVar.attr("name", "checkList");
+                    strVar.attr("vid", chindex);
                     var lable = strVar.find("#sel0"); //根据id查找子元素
                     lable.attr("id", "sel" + chindex); //改变克隆子元素节点一
                     $("#checks").append(strVar);
@@ -276,6 +279,104 @@
                     chindex++;
                     checkmoney += 100;
                     $("#cmm").html("￥" + checkmoney);
+                }
+            });
+            $("#saveinfo").click(function () {
+                //开处方
+                if (which == "1") {
+                    // {
+                    //     "aka130": "string",
+                    //     "department": "string",
+                    //     "diagnosecode": "string",
+                    //     "medicine": [
+                    //         {
+                    //         "brandname": "string",
+                    //         "dosageform": "string",
+                    //         "dosesiz": "string",
+                    //         "frequency": "string",
+                    //         "id": "string",
+                    //         "medicinecnt": "string",
+                    //         "medicinename": "string",
+                    //         "medicinesize": "string",
+                    //         "money": "string",
+                    //         "remark": "string",
+                    //         "sellpackage": "string"
+                    //         }
+                    //     ],
+                    //     "patientAge": "string",
+                    //     "patientIdcard": "string",
+                    //     "patientName": "string",
+                    //     "patientSex": "string"
+                    // }
+                    let drugDTO = new Object();
+                    drugDTO.aka130 = "11";
+                    drugDTO.department = "呼吸内科";
+                    drugDTO.diagnosecode = "77";
+                    drugDTO.patientAge = localStorage.getItem("patientage");
+                    drugDTO.patientIdcard = "500227200001296321";
+                    drugDTO.patientName = localStorage.getItem("patientname");
+                    drugDTO.patientSex = localStorage.getItem("patientsex");
+
+                    let medicines = new Array();
+                    let ci = 0;
+                    $("input[name*='dmm']").each(function () {
+                        let tmpid = $(this).attr("vid");
+                        let medicineDTO = new Object();
+                        medicineDTO.brandname = "";
+                        medicineDTO.dosageform = "";
+                        medicineDTO.dosesiz = "";
+                        medicineDTO.frequency = "";
+                        medicineDTO.id = "MED" + tmpid;
+                        medicineDTO.medicinecnt = "";
+                        medicineDTO.medicinename = "";
+                        medicineDTO.medicinesize = "";
+                        medicineDTO.money = "";
+                        medicineDTO.remark = "";
+                        medicineDTO.sellpackage = "";
+                        medicines.push(medicineDTO);
+                    })
+                }
+                //开检查
+                else {
+                    let chinfos = new Array();
+                    let ci = 0;
+                    $("div[name*='checkList']").each(function () {
+                        let tmpid = $(this).attr("vid");
+                        console.log(tmpid);
+                        let checkDTO = new Object();
+                        checkDTO.aka130 = "11";
+                        checkDTO.department = "检验科";
+                        checkDTO.description = $("#sel" + tmpid).val();
+                        checkDTO.id = "CMS" + tmpid;
+                        checkDTO.money = "100";
+                        checkDTO.patientage = localStorage.getItem("patientage");
+                        checkDTO.patientidcard = "130103198636650236";
+                        checkDTO.patientname = localStorage.getItem("patientname");
+                        checkDTO.patientsex = localStorage.getItem("patientsex");
+                        checkDTO.result = "CMS测试";
+                        chinfos.push(checkDTO);
+                    });
+                    console.log(chinfos);
+                    //保存检查
+                    $.ajax({
+                        url: "http://localhost/api/v1/diagnose/" + localStorage.getItem("diaID") + "/check",
+                        type: "POST",
+                        headers: {
+                            "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                            "X-CARD-CODE": localStorage.getItem("X-CARD-CODE")
+                        },
+                        data: JSON.stringify(chinfos),
+                        contentType: "application/json; charset=UTF-8",
+                        dataType: "json",
+                        error: function (xhr) {
+                            // console.log(xhr);
+                            getHao(xhr.responseJSON.message);
+                            return false;
+                        }
+                    }).done(function (data, status, xhr) {
+                        console.log(data);
+                        getHao(data.message);
+                    });
                 }
             });
             $("#a2").css("color", "#1890FF").css("border-bottom", "2px solid #1890FF");
@@ -296,6 +397,10 @@
                     $(this).parent().parent().remove();
                 }
             });
+        }
+        function getHao(info) {
+            $('#minfo').html(info)
+            $('#myModal').modal('show')
         }
         function delcheck(n) {
             $(n).parent().parent().parent().parent().parent().parent().parent().remove();
@@ -347,7 +452,8 @@
                                 <div class="p-1 w-50">
                                     <div class="media h-100 justify-content-end">
                                         <div class="align-self-center h6">
-                                            当前挂号人数<span style="font-size: 25px;color: red;margin-top: -5px;">3</span>人
+                                            当前挂号人数<span style="font-size: 25px;color: red;margin-top: -5px;"
+                                                id="ghnum">0</span>人
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +529,8 @@
                                     </div>
                                     <div class="align-self-center justify-content-end w-30 h5"
                                         style="width:40%;text-align: right;margin-right:50px">
-                                        <button type="button" class="btn btn-primary">就诊记录</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="location.href='saoma.html'">就诊记录</button>
                                     </div>
                                 </div>
                                 <div class="d-flex p-2 w-100">
@@ -488,8 +595,8 @@
                                             <div class=""><button type="button" class="btn border"
                                                     onclick="deleteDrug()">&nbsp;&nbsp;删除&nbsp;&nbsp;</button>&nbsp;&nbsp;
                                             </div>
-                                            <div class=""><button type="button"
-                                                    class="btn border">&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
+                                            <div class=""><button type="button" class="btn border"
+                                                    id="saveinfo">&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
                                             </div>
                                         </div>
                                     </div>
@@ -521,7 +628,7 @@
                                 <div id="iiicheck" class="w-100"
                                     style="position: relative;margin:0px;padding:0px;background-color: white;">
                                     <div id="checks" class="d-flex justify-content-start mb-3" style="flex-wrap: wrap">
-                                        <div class="p-2" id="ch1">
+                                        <div class="p-2" id="ch1" name="checkList" vid="1">
                                             <div class="card">
                                                 <div class="card-body" style="width: 450px;">
                                                     <div class="d-flex flex-column">
@@ -632,9 +739,30 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h3 class="modal-title">信息提示</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <h4 class="panel-title" id="minfo"></h4>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
