@@ -112,127 +112,167 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            Mock.mock('/api/v1/diagnose/id', 'get', {
-                "checkDTOS": [
-                    {
-                        "aka130": "string",
-                        "department": "string",
-                        "description": "胸透",
-                        "diagnosecode": "string",
-                        "id": "string",
-                        "money": "100",
-                        "patientage": "string",
-                        "patientidcard": "string",
-                        "patientname": "string",
-                        "patientsex": "string",
-                        "result": "string"
-                    },
-                    {
-                        "aka130": "string",
-                        "department": "string",
-                        "description": "血常规",
-                        "diagnosecode": "string",
-                        "id": "string",
-                        "money": "200",
-                        "patientage": "string",
-                        "patientidcard": "string",
-                        "patientname": "string",
-                        "patientsex": "string",
-                        "result": "string"
-                    }
-                ],
-                "checkmoney": "string",
-                "drugmoney": "string",
-                "endtime": "string",
-                "id": "string",
-                "patientage": "string",
-                "patientidcard": "string",
-                "patientname": "string",
-                "patientsex": "string",
-                "recipe": {
-                    "aka130": "string",
-                    "department": "string",
-                    "diagnosecode": "string",
-                    "medicine": [
-                        {
-                            "brandname": "string",
-                            "dosageform": "string",
-                            "dosesiz": "string",
-                            "frequency": "string",
-                            "id": "string",
-                            "medicinecnt": "3",
-                            "medicinename": "阿司匹林",
-                            "medicinesize": "string",
-                            "money": "50.9",
-                            "remark": "string",
-                            "sellpackage": "string"
-                        }, {
-                            "brandname": "string",
-                            "dosageform": "string",
-                            "dosesiz": "string",
-                            "frequency": "string",
-                            "id": "string",
-                            "medicinecnt": "5",
-                            "medicinename": "氯雷他定",
-                            "medicinesize": "string",
-                            "money": "79.98",
-                            "remark": "string",
-                            "sellpackage": "string"
-                        }
-                    ],
-                    "patientAge": "string",
-                    "patientIdcard": "string",
-                    "patientName": "string",
-                    "patientSex": "string"
-                },
-                "result": "string",
-                "starttime": "string",
-                "state": "string",
-                "totalmoney": "string"
-            })
+            // Mock.mock('/api/v1/diagnose/id', 'get', {
+            //     "checkDTOS": [
+            //         {
+            //             "aka130": "string",
+            //             "department": "string",
+            //             "description": "胸透",
+            //             "diagnosecode": "string",
+            //             "id": "string",
+            //             "money": "100",
+            //             "patientage": "string",
+            //             "patientidcard": "string",
+            //             "patientname": "string",
+            //             "patientsex": "string",
+            //             "result": "string"
+            //         },
+            //         {
+            //             "aka130": "string",
+            //             "department": "string",
+            //             "description": "血常规",
+            //             "diagnosecode": "string",
+            //             "id": "string",
+            //             "money": "200",
+            //             "patientage": "string",
+            //             "patientidcard": "string",
+            //             "patientname": "string",
+            //             "patientsex": "string",
+            //             "result": "string"
+            //         }
+            //     ],
+            //     "checkmoney": "string",
+            //     "drugmoney": "string",
+            //     "endtime": "string",
+            //     "id": "string",
+            //     "patientage": "string",
+            //     "patientidcard": "string",
+            //     "patientname": "string",
+            //     "patientsex": "string",
+            //     "recipe": {
+            //         "aka130": "string",
+            //         "department": "string",
+            //         "diagnosecode": "string",
+            //         "medicine": [
+            //             {
+            //                 "brandname": "string",
+            //                 "dosageform": "string",
+            //                 "dosesiz": "string",
+            //                 "frequency": "string",
+            //                 "id": "string",
+            //                 "medicinecnt": "3",
+            //                 "medicinename": "阿司匹林",
+            //                 "medicinesize": "string",
+            //                 "money": "50.9",
+            //                 "remark": "string",
+            //                 "sellpackage": "string"
+            //             }, {
+            //                 "brandname": "string",
+            //                 "dosageform": "string",
+            //                 "dosesiz": "string",
+            //                 "frequency": "string",
+            //                 "id": "string",
+            //                 "medicinecnt": "5",
+            //                 "medicinename": "氯雷他定",
+            //                 "medicinesize": "string",
+            //                 "money": "79.98",
+            //                 "remark": "string",
+            //                 "sellpackage": "string"
+            //             }
+            //         ],
+            //         "patientAge": "string",
+            //         "patientIdcard": "string",
+            //         "patientName": "string",
+            //         "patientSex": "string"
+            //     },
+            //     "result": "string",
+            //     "starttime": "string",
+            //     "state": "string",
+            //     "totalmoney": "string"
+            // })
             var searchUrl = window.location.href;
             var searchData = searchUrl.split("=");
             var sid = searchData[1];
             $.ajax({
-                url: "/api/v1/diagnose/id",
-                type: "GET",
+                url: "/api/v1/card",
+                type: "POST",
                 headers: {
-                    "Authorization": "Bearer" + localStorage.getItem("access_token"),
-                    "X-CARD-CODE": "18450623655182337"
+                    Authorization: "Bearer" + localStorage.getItem("access_token")
                 },
                 contentType: 'application/json; charset=UTF-8',
-                dataType: "json"
+                // data: JSON.stringify(user),
+                dataType: "json",
+                error: function (xhr) {
+                    console.log(xhr);
+                    return false;
+                }
             }).done(function (data, status, xhr) {
                 console.log(data);
-                //处理检查
-                var checks = data.checkDTOS;
-                var checkall = 0;
-                for (var i = 0; i < checks.length; i++) {
-                    $str = "<tr height='90px'>";
-                    $str += "<td width='40%' align='center' class='h12'>" + checks[i].description + "</td>";
-                    $str += "<td width='40%' class='h12'>x1</td>";
-                    $str += "<td width='20%' class='h12' style='color: rgba(255, 30, 30, 1); '>" + checks[i].money + "￥</td>";
-                    $str += "</tr>";
-                    $("#check1").before($str);
-                    checkall += parseFloat(checks[i].money);
-                }
-                $("#checkall").html(checkall + "￥");
-                //处理处方
-                var drugs = data.recipe.medicine;
-                var drugall = 0;
-                for (var i = 0; i < drugs.length; i++) {
-                    $dstr = "<tr height='90px'>";
-                    $dstr += "<td width='40%' align='center' class='h12'>" + drugs[i].medicinename + "</td>";
-                    $dstr += "<td width='40%' class='h12'>x" + drugs[i].medicinecnt + "</td>";
-                    $dstr += "<td width='20%' class='h12' style='color: rgba(255, 30, 30, 1); '>" + drugs[i].money + "￥</td>";
-                    $dstr += "</tr>";
-                    $("#drug1").before($dstr);
-                    drugall += parseFloat(drugs[i].money);
-                }
-                $("#drugall").html(drugall + "￥");
-                $("#allm").html((drugall + checkall) + "￥");
-            });
+                $.ajax({
+                    url: "/api/v1/card",
+                    type: "GET",
+                    headers: {
+                        Authorization: "Bearer" + localStorage.getItem("access_token")
+                    },
+                    contentType: 'application/json; charset=UTF-8',
+                    // data: JSON.stringify(user),
+                    dataType: "json",
+                    error: function (xhr) {
+                        console.log(xhr);
+                        return false;
+                    }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    $.ajax({
+                        url: "/api/v1/diagnose/" + sid,
+                        type: "GET",
+                        headers: {
+                            "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                            "X-CARD-CODE": data.code
+                        },
+                        contentType: 'application/json; charset=UTF-8',
+                        dataType: "json"
+                    }).done(function (data, status, xhr) {
+                        console.log(data);
+                        $("#sdate").html(data.starttime);
+                        $("#cdto").html("上呼吸道感染");
+                        //处理检查
+                        var checks = data.checkDTOS;
+                        var checkall = 0;
+                        for (var i = 0; i < checks.length; i++) {
+                            $str = "<tr height='90px'>";
+                            $str += "<td width='40%' align='center' class='h12'>" + checks[i].description + "</td>";
+                            $str += "<td width='40%' class='h12'>x1</td>";
+                            $str += "<td width='20%' class='h12' style='color: rgba(255, 30, 30, 1); '>" + checks[i].money + "￥</td>";
+                            $str += "</tr>";
+                            $("#check1").before($str);
+                            checkall += parseFloat(checks[i].money);
+                        }
+                        $("#checkall").html(checkall + "￥");
+                        //处理处方
+                        var drugs = data.recipe.medicine;
+                        var drugall = 0;
+                        for (var i = 0; i < drugs.length; i++) {
+                            $dstr = "<tr height='90px'>";
+                            $dstr += "<td width='40%' align='center' class='h12'>" + drugs[i].medicinename + "</td>";
+                            $dstr += "<td width='40%' class='h12'>x" + drugs[i].medicinecnt + "(" + drugs[i].sellpackage + ")</td>";
+                            $dstr += "<td width='20%' class='h12' style='color: rgba(255, 30, 30, 1); '>" + drugs[i].money + "￥</td>";
+                            $dstr += "</tr>";
+                            $("#drug1").before($dstr);
+                            drugall += parseFloat(drugs[i].money);
+                        }
+                        $("#drugall").html(drugall + "￥");
+                        $("#allm").html((drugall + checkall) + "￥");
+                    });
+                })
+            })
+
         });
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
     </script>
 </head>
 
@@ -250,12 +290,12 @@
         <br>
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-3 h4">刘秀梅</div>
+            <div class="col-md-3 h4">蒋圣蓉</div>
             <div class="col-md-8 h4">心内科丨副主任医师</div>
         </div>
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-11 h4">2019-09-23 15:00:00</div>
+            <div id="sdate" class="col-md-11 h4"></div>
         </div>
         <br><br>
         <div class="h6">
@@ -265,7 +305,7 @@
                     <td>
                         <div class="h7">诊断结果</div>
                         <div style="height: 20px"></div>
-                        <div class="h8">流行性感冒</div>
+                        <div class="h8" id="cdto"></div>
                     </td>
                     <td width="20%" class="h8" style="color:rgba(255,30,30,1);" id="allm"></td>
                 </tr>

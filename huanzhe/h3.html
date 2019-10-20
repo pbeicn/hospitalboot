@@ -144,6 +144,8 @@
             }).done(function (data, status, xhr) {
                 console.log(data);
                 $("#pname").html(data.name);
+                localStorage.setItem("hname", data.name);
+                localStorage.setItem("hidcard", data.idcard);
             })
             console.log(localStorage.getItem("access_token"));
             $("#toCard").click(function () {
@@ -191,7 +193,7 @@
             </div>
             <div class="col-md-1">
                 <br>
-                <div class="h4" onclick="window.location='h1.html'">退出</div>
+                <div class="h4" onclick="window.location='../index.html'">退出</div>
             </div>
         </div>
     </div>

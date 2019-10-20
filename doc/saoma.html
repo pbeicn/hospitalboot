@@ -206,7 +206,6 @@
         contentType: "application/json; charset=UTF-8",
         dataType: "json"
       }).done(function (data, status, xhr) {
-        debugger;
         console.log(data);
         $("#indocs").empty();
         // let ddd = data['data'];
@@ -315,7 +314,7 @@
                   $("#checks").append($checklist);
                 });
               }
-              $("#checks").append("<div class='p-2 w-100' style='text-align: right;background: white;'>合计:<span style='color: red;' id='cmm'>￥800.00</div>");
+              $("#checks").append("<div class='p-2 w-100' style='text-align: right;background: white;'>合计:<span style='color: red;' id='cmm'>￥" + element.checkmoney + "</div>");
             }
           }
         }

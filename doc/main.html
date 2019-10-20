@@ -184,7 +184,9 @@
         var chindex = 2;
         var dsindex = 1;
         var checkmoney = 100;
+        var drugMoney = 0;
         $(function () {
+            $("#dmony").html(drugMoney);
             $.ajax({
                 url: "/api/v1/doctor1",
                 type: "GET",
@@ -259,7 +261,7 @@
                     $drug += "<td><input type='text' class='form-control' id='die" + dsindex + "'></td>";
                     $drug += "<td><input type='text' class='form-control' id='dif" + dsindex + "'></td>";
                     $drug += "<td><input type='text' class='form-control' id='dig" + dsindex + "'></td>";
-                    $drug += "<td><input type='text' class='form-control' id='dih" + dsindex + "'></td>";
+                    $drug += "<td><input type='text' class='form-control' onblur='feeprice(" + dsindex + ")' name='price' id='dih" + dsindex + "'></td>";
                     $drug += "<td id='dmoney" + dsindex + "'></td>";
                     $drug += "</tr>";
                     $("#drugs").append($drug);
@@ -350,8 +352,27 @@
                         dataType: "json",
                         error: function (xhr) {
                             console.log(xhr);
-                            getHao(xhr.responseJSON.message);
-                            return false;
+                            // getHao(xhr.responseJSON.message);
+                            // return false;
+                            $.ajax({
+                                url: "/api/v1/diagnose/" + localStorage.getItem("diaID") + "/recipe",
+                                type: "PUT",
+                                headers: {
+                                    "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                                    "X-CARD-CODE": localStorage.getItem("X-CARD-CODE")
+                                },
+                                data: JSON.stringify(drugDTO),
+                                contentType: "application/json; charset=UTF-8",
+                                dataType: "json",
+                                error: function (xhr) {
+                                    console.log(xhr);
+                                    getHao(xhr.responseJSON.message);
+                                    return false;
+                                }
+                            }).done(function (data, status, xhr) {
+                                console.log(data);
+                                getHao(data.message);
+                            });
                         }
                     }).done(function (data, status, xhr) {
                         console.log(data);
@@ -460,7 +481,10 @@
         function deleteDrug() {
             $("input[name='dmm']").each(function () {
                 if (this.checked) {
+                    var n = $(this).attr("vid");
+                    drugMoney = parseFloat(drugMoney) - parseFloat($("#dig" + n).val()) * parseFloat($("#dih" + n).val());
                     $(this).parent().parent().remove();
+                    $("#dmony").html(drugMoney);
                 }
             });
         }
@@ -472,6 +496,11 @@
             $(n).parent().parent().parent().parent().parent().parent().parent().remove();
             checkmoney -= 100;
             $("#cmm").html("￥" + checkmoney);
+        }
+        function feeprice(n) {
+            $("#dmoney" + n).html("<div style='height:8px'></div>" + parseFloat($("#dig" + n).val()) * parseFloat($("#dih" + n).val()));
+            drugMoney = parseFloat(drugMoney) + parseFloat($("#dig" + n).val()) * parseFloat($("#dih" + n).val());
+            $("#dmony").html(drugMoney);
         }
     </script>
 </head>
@@ -687,8 +716,8 @@
                                         <tbody id="drugs">
                                         </tbody>
                                     </table>
-                                    <div class="p-2 w-100" style="text-align: right;">合计:<span style="color: red;"
-                                            id="dmm">￥100.00</div>
+                                    <div class="p-2 w-100" style="text-align: right;">合计:<span id="dmony"
+                                            style="color: red;" id="dmm">￥100.00</div>
                                 </div>
                                 <div id="iiicheck" class="w-100"
                                     style="position: relative;margin:0px;padding:0px;background-color: white;">

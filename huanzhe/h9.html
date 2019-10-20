@@ -46,7 +46,7 @@
         }
 
         .h5 {
-            margin-top: 1.5%;
+            margin-top: 2%;
             margin-left: 10%;
             height: 56px;
             font-size: 40px;
@@ -57,7 +57,7 @@
         }
 
         .h6 {
-            margin-top: 1.5%;
+            margin-top: 2%;
             margin-left: 10%;
             height: 42px;
             font-size: 30px;
@@ -136,184 +136,223 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            Mock.mock('/api/v1/code', 'get', {
-                "pname": "@CNAME",
-                "idcardno": "@ID"
-            })
-            Mock.mock('/api/v1/diagnose/recent', 'get', [
-                {
-                    "checkDTOS": [
-                        {
-                            "aka130": "string",
-                            "department": "string",
-                            "description": "string",
-                            "diagnosecode": "string",
-                            "id": "string",
-                            "money": "string",
-                            "patientage": "string",
-                            "patientidcard": "string",
-                            "patientname": "string",
-                            "patientsex": "string",
-                            "result": "string"
-                        }
-                    ],
-                    "checkmoney": "300",
-                    "drugmoney": "string",
-                    "endtime": "string",
-                    "id": "1",
-                    "patientage": "string",
-                    "patientidcard": "string",
-                    "patientname": "string",
-                    "patientsex": "string",
-                    "recipe": {
-                        "aka130": "string",
-                        "department": "心内科",
-                        "diagnosecode": "string",
-                        "medicine": [
-                            {
-                                "brandname": "string",
-                                "dosageform": "string",
-                                "dosesiz": "string",
-                                "frequency": "string",
-                                "id": "string",
-                                "medicinecnt": "string",
-                                "medicinename": "string",
-                                "medicinesize": "string",
-                                "money": "string",
-                                "remark": "string",
-                                "sellpackage": "string"
-                            }
-                        ],
-                        "patientAge": "string",
-                        "patientIdcard": "string",
-                        "patientName": "string",
-                        "patientSex": "string"
-                    },
-                    "result": "string",
-                    "starttime": "2019-09-23",
-                    "state": "string",
-                    "totalmoney": "500"
-                },
-                {
-                    "checkDTOS": [
-                        {
-                            "aka130": "string",
-                            "department": "string",
-                            "description": "string",
-                            "diagnosecode": "string",
-                            "id": "string",
-                            "money": "string",
-                            "patientage": "string",
-                            "patientidcard": "string",
-                            "patientname": "string",
-                            "patientsex": "string",
-                            "result": "string"
-                        }
-                    ],
-                    "checkmoney": "200",
-                    "drugmoney": "string",
-                    "endtime": "string",
-                    "id": "2",
-                    "patientage": "string",
-                    "patientidcard": "string",
-                    "patientname": "string",
-                    "patientsex": "string",
-                    "recipe": {
-                        "aka130": "string",
-                        "department": "神经外科",
-                        "diagnosecode": "string",
-                        "medicine": [
-                            {
-                                "brandname": "string",
-                                "dosageform": "string",
-                                "dosesiz": "string",
-                                "frequency": "string",
-                                "id": "string",
-                                "medicinecnt": "string",
-                                "medicinename": "string",
-                                "medicinesize": "string",
-                                "money": "string",
-                                "remark": "string",
-                                "sellpackage": "string"
-                            }
-                        ],
-                        "patientAge": "string",
-                        "patientIdcard": "string",
-                        "patientName": "string",
-                        "patientSex": "string"
-                    },
-                    "result": "string",
-                    "starttime": "2019-09-23",
-                    "state": "string",
-                    "totalmoney": "700"
-                }
-            ])
+            // Mock.mock('/api/v1/diagnose/recent', 'get', [
+            //     {
+            //         "checkDTOS": [
+            //             {
+            //                 "aka130": "string",
+            //                 "department": "string",
+            //                 "description": "string",
+            //                 "diagnosecode": "string",
+            //                 "id": "string",
+            //                 "money": "string",
+            //                 "patientage": "string",
+            //                 "patientidcard": "string",
+            //                 "patientname": "string",
+            //                 "patientsex": "string",
+            //                 "result": "string"
+            //             }
+            //         ],
+            //         "checkmoney": "300",
+            //         "drugmoney": "string",
+            //         "endtime": "string",
+            //         "id": "1",
+            //         "patientage": "string",
+            //         "patientidcard": "string",
+            //         "patientname": "string",
+            //         "patientsex": "string",
+            //         "recipe": {
+            //             "aka130": "string",
+            //             "department": "心内科",
+            //             "diagnosecode": "string",
+            //             "medicine": [
+            //                 {
+            //                     "brandname": "string",
+            //                     "dosageform": "string",
+            //                     "dosesiz": "string",
+            //                     "frequency": "string",
+            //                     "id": "string",
+            //                     "medicinecnt": "string",
+            //                     "medicinename": "string",
+            //                     "medicinesize": "string",
+            //                     "money": "string",
+            //                     "remark": "string",
+            //                     "sellpackage": "string"
+            //                 }
+            //             ],
+            //             "patientAge": "string",
+            //             "patientIdcard": "string",
+            //             "patientName": "string",
+            //             "patientSex": "string"
+            //         },
+            //         "result": "string",
+            //         "starttime": "2019-09-23",
+            //         "state": "string",
+            //         "totalmoney": "500"
+            //     },
+            //     {
+            //         "checkDTOS": [
+            //             {
+            //                 "aka130": "string",
+            //                 "department": "string",
+            //                 "description": "string",
+            //                 "diagnosecode": "string",
+            //                 "id": "string",
+            //                 "money": "string",
+            //                 "patientage": "string",
+            //                 "patientidcard": "string",
+            //                 "patientname": "string",
+            //                 "patientsex": "string",
+            //                 "result": "string"
+            //             }
+            //         ],
+            //         "checkmoney": "200",
+            //         "drugmoney": "string",
+            //         "endtime": "string",
+            //         "id": "2",
+            //         "patientage": "string",
+            //         "patientidcard": "string",
+            //         "patientname": "string",
+            //         "patientsex": "string",
+            //         "recipe": {
+            //             "aka130": "string",
+            //             "department": "神经外科",
+            //             "diagnosecode": "string",
+            //             "medicine": [
+            //                 {
+            //                     "brandname": "string",
+            //                     "dosageform": "string",
+            //                     "dosesiz": "string",
+            //                     "frequency": "string",
+            //                     "id": "string",
+            //                     "medicinecnt": "string",
+            //                     "medicinename": "string",
+            //                     "medicinesize": "string",
+            //                     "money": "string",
+            //                     "remark": "string",
+            //                     "sellpackage": "string"
+            //                 }
+            //             ],
+            //             "patientAge": "string",
+            //             "patientIdcard": "string",
+            //             "patientName": "string",
+            //             "patientSex": "string"
+            //         },
+            //         "result": "string",
+            //         "starttime": "2019-09-23",
+            //         "state": "string",
+            //         "totalmoney": "700"
+            //     }
+            // ])
+            // $.ajax({
+            //     url: "/api/v1/code",
+            //     type: "GET",
+            //     // headers: {
+            //     //     Authorization: "Beareraaa"
+            //     // },
+            //     contentType: 'application/json; charset=UTF-8',
+            //     dataType: "json"
+            // }).done(function (data, status, xhr) {
+            //     console.log(data);
+            //     $("#u1").html(data.pname);
+            //     $("#u2").html(localStorage.getItem("idcard"));
+            // })
+            $("#u1").html(localStorage.getItem("hname"));
+            $("#u2").html(localStorage.getItem("hidcard"));
             $.ajax({
-                url: "/api/v1/code",
-                type: "GET",
-                // headers: {
-                //     Authorization: "Beareraaa"
-                // },
-                contentType: 'application/json; charset=UTF-8',
-                dataType: "json"
-            }).done(function (data, status, xhr) {
-                console.log(data);
-                $("#u1").html(data.pname);
-                $("#u2").html(localStorage.getItem("idcard"));
-            })
-            $.ajax({
-                url: "/api/v1/diagnose/recent",
-                type: "GET",
+                url: "/api/v1/card",
+                type: "POST",
                 headers: {
-                    "Authorization": "Bearer" + localStorage.getItem("access_token"),
-                    "X-CARD-CODE": "18450623655182337"
+                    Authorization: "Bearer" + localStorage.getItem("access_token")
                 },
                 contentType: 'application/json; charset=UTF-8',
-                dataType: "json"
+                // data: JSON.stringify(user),
+                dataType: "json",
+                error: function (xhr) {
+                    console.log(xhr);
+                    return false;
+                }
             }).done(function (data, status, xhr) {
                 console.log(data);
-                var wh = "";
-                for (var i = 0; i < data.length; i++) {
-                    switch (i) {
-                        case 0:
-                            wh = "h8"
-                            break;
-                        case 1:
-                            wh = "h81"
-                            break;
-                        default:
-                            wh = "h82"
+                $.ajax({
+                    url: "/api/v1/card",
+                    type: "GET",
+                    headers: {
+                        Authorization: "Bearer" + localStorage.getItem("access_token")
+                    },
+                    contentType: 'application/json; charset=UTF-8',
+                    // data: JSON.stringify(user),
+                    dataType: "json",
+                    error: function (xhr) {
+                        console.log(xhr);
+                        return false;
                     }
-                    $str = "<div class='row'>";
-                    $str += "<div class='col-md-12'>";
-                    $str += "<div class='h7'>";
-                    $str += "<table>";
-                    $str += "<tr>";
-                    $str += "<td>";
-                    $str += "<div class='" + wh + "'></div>";
-                    $str += "</td>";
-                    $str += "<td width='100%'>";
-                    $str += "<div class='h9'>科室：" + data[i].recipe.department + "<span style='margin-left: 30%;width: 100px'>医生：刘素梅</span></div>";
-                    $str += "<br>";
-                    $str += "<div class='h10'>" + data[i].totalmoney + "￥</div>";
-                    $str += "</td>";
-                    $str += "<td>";
-                    $str += "<table height='100%'>";
-                    $str += "<tr>";
-                    $str += "<td><i class='fa fa-chevron-right' aria-hidden='true' style='cursor:hand' onclick=\"location.href='h10.html?id="+data[i].id+"'\"></i></td>";
-                    $str += "</tr>";
-                    $str += "</table>";
-                    $str += "</td>";
-                    $str += " </tr>";
-                    $str += "</table>";
-                    $str += "<div class='h11'><img height='53px' src='../img/hzh9/4.png'></div>";
-                    $str += "<div class='h12'>" + data[i].starttime + "</div>";
-                    $str += "</div>";
-                    $str += "</div>";
-                    $str += "</div>";
-                    $str += "<br>";
-                    $("#cc").append($str);
-                }
+                }).done(function (data, status, xhr) {
+                    console.log(data);
+                    if (data.vid != "" || data.vid != null) {
+                        // $("#code").qrcode({
+                        //     render: "table",
+                        //     width: $('#aaa').width() * 0.7,
+                        //     height: $('#aaa').height() * 0.8,
+                        //     text: data.code
+                        // });
+                        // $("#vid").html(data.code);
+                        $.ajax({
+                            url: "/api/v1/diagnose/recent",
+                            type: "GET",
+                            headers: {
+                                "Authorization": "Bearer" + localStorage.getItem("access_token"),
+                                "X-CARD-CODE": data.code
+                            },
+                            contentType: 'application/json; charset=UTF-8',
+                            dataType: "json"
+                        }).done(function (data, status, xhr) {
+                            console.log(data);
+                            var wh = "";
+                            for (var i = 0; i < data.length; i++) {
+                                switch (i) {
+                                    case 0:
+                                        wh = "h8"
+                                        break;
+                                    case 1:
+                                        wh = "h81"
+                                        break;
+                                    default:
+                                        wh = "h82"
+                                }
+                                $str = "<div class='row'>";
+                                $str += "<div class='col-md-12'>";
+                                $str += "<div class='h7'>";
+                                $str += "<table>";
+                                $str += "<tr>";
+                                $str += "<td>";
+                                $str += "<div class='" + wh + "'></div>";
+                                $str += "</td>";
+                                $str += "<td width='100%'>";
+                                $str += "<div class='h9'>科室：呼吸内科<span style='margin-left: 30%;width: 100px'>医生：蒋圣蓉</span></div>";
+                                $str += "<br>";
+                                $str += "<div class='h10'>" + data[i].totalmoney + "￥</div>";
+                                $str += "</td>";
+                                $str += "<td>";
+                                $str += "<table height='100%'>";
+                                $str += "<tr>";
+                                $str += "<td><i class='fa fa-chevron-right' aria-hidden='true' style='cursor:hand' onclick=\"location.href='h10.html?id=" + data[i].id + "'\"></i></td>";
+                                $str += "</tr>";
+                                $str += "</table>";
+                                $str += "</td>";
+                                $str += " </tr>";
+                                $str += "</table>";
+                                $str += "<div class='h11'><img height='53px' src='../img/hzh9/4.png'></div>";
+                                $str += "<div class='h12'>" + data[i].starttime + "</div>";
+                                $str += "</div>";
+                                $str += "</div>";
+                                $str += "</div>";
+                                $str += "<br>";
+                                $("#cc").append($str);
+                            }
+                        })
+                    }
+                })
             })
         });
     </script>
